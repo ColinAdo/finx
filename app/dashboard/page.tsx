@@ -1,11 +1,9 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { List, Spinner } from "@/components/common";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 
 export default function Page() {
-  const router = useRouter();
   const { data: user, isLoading } = useRetrieveUserQuery();
   const config = [
     {
