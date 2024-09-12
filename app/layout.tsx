@@ -34,7 +34,9 @@ export default function RootLayout({
         <Provider>
           <Setup />
           <Navbar />
-          {children}
+          <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 my-8">
+            {children}
+          </div>
           <Footer />
         </Provider>
       </body>
