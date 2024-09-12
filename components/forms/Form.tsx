@@ -6,6 +6,10 @@ interface Config {
   lebalText: string;
   lebalId: string;
   type: string;
+  link?: {
+    linkText: string;
+    linkUrl: string;
+  };
   value: string;
   required?: boolean;
 }
@@ -33,6 +37,7 @@ export default function Form({
           lebalId={input.lebalId}
           type={input.type}
           value={input.value}
+          link={input.link}
           onChange={onChange}
           required={input.required}
         >
