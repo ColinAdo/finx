@@ -1,5 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "@/components/forms";
+
+export const metadata: Metadata = {
+  title: "Finx | Login",
+  description: "Finx login page",
+};
 
 export default function Page() {
   return (
