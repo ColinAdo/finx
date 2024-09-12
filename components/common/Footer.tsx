@@ -4,7 +4,7 @@ export default function Footer() {
       <div className="h-full px-2">
         <div className="flex items-center justify-center h-full">
           <p className="text-gray-500 text-xs">
-            &copy; 2024 Monie, Inc. All rights reserved.
+            &copy; 2024 Finx, Inc. All rights reserved.
           </p>
         </div>
       </div>
