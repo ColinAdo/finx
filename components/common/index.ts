@@ -9,3 +9,5 @@ export { default as NavLink } from "./NavLink";
 export { default as List } from "./List";
 export { default as SocialButton } from "./SocialButton";
 export { default as SocialButtons } from "./SocialButtons";
+export { default as UserAvatar } from "./UserAvatar";
+export { default as ProfileLink } from "./ProfileLink";
