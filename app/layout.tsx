@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import Provider from "@/redux/Provider";
+import { ThemeProvider } from "@/components/common/ThemeProvider";
 import { Navbar, Footer } from "@/components/common";
 import { Setup } from "@/components/utils";
 
@@ -27,17 +28,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Provider>
-          <Setup />
-          <Navbar />
-          <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 my-8">
-            {children}
-          </div>
-          <Footer />
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Setup />
+            {/* <Navbar /> */}
+            <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 my-8">
+              {children}
+            </div>
+            {/* <Footer /> */}
+          </ThemeProvider>
         </Provider>
       </body>
     </html>
