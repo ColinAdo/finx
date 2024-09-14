@@ -107,31 +107,8 @@ export default function Page() {
                   name="fileUrl"
                   render={({ field, fieldState }) => (
                     <FormItem>
-                      {/* <FormLabel htmlFor="picture">Picture</FormLabel> */}
                       <FormControl>
-                        {/* <UploadButton
-                          endpoint="fileUploader"
-                          onClientUploadComplete={(res) => {
-                            form.setValue("fileUrl", res[0].url);
-                            toast.success("Upload complete");
-                          }}
-                          onUploadError={(error: Error) => {
-                            console.error(error);
-                            toast.error("Upload failed");
-                          }}
-                        /> */}
                         <>
-                          {/* <SingleImageDropzone
-                            width={200}
-                            height={200}
-                            value={file}
-                            dropzoneOptions={{
-                              maxSize: 1024 * 1024 * 1, // 1MB
-                            }}
-                            onChange={(file) => {
-                              setFile(file);
-                            }}
-                          /> */}
                           <label
                             htmlFor="fileInput"
                             className="flex justify-center cursor-pointer max-w-full p-3"
@@ -157,9 +134,6 @@ export default function Page() {
                           </div>
                         </>
                       </FormControl>
-                      {/* <FormDescription>
-                        Upload a picture or a real to post.
-                      </FormDescription> */}
                       <FormMessage />
                     </FormItem>
                   )}
