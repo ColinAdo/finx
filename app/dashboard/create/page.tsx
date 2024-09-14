@@ -1,6 +1,5 @@
 "use client";
 
-// import Error from "@/components/Error";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,7 +11,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -20,9 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useMount } from "@/hooks";
-// import { createPost } from "@/lib/actions";
 import { CreatePost } from "@/lib/schemas";
-// import { UploadButton } from "@/lib/uploadthing";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Bell, CameraIcon } from "lucide-react";
 import Image from "next/image";
@@ -31,7 +27,6 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useEdgeStore } from "@/lib/edgestore";
-import Link from "next/link";
 import { useState } from "react";
 
 export default function Page() {
@@ -39,7 +34,6 @@ export default function Page() {
   const [progress, setProgress] = useState(0);
   const [fileUrl, setfileUrl] = useState<{
     url: string;
-    // thumbnailUrl: string | null;
   }>();
   const { edgestore } = useEdgeStore();
 
@@ -51,10 +45,8 @@ export default function Page() {
     resolver: zodResolver(CreatePost),
     defaultValues: {
       caption: "",
-      // fileUrl: undefined,
     },
   });
-  // const fileUrl = form.watch("fileUrl");
 
   if (!mount) return null;
 
