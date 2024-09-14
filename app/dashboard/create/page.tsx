@@ -1,7 +1,5 @@
 "use client";
 
-import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -16,6 +14,8 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useMount } from "@/hooks";
@@ -162,15 +162,12 @@ export default function Page() {
                     if (file) {
                       const res = await edgestore.publicFiles.upload({
                         file,
-                        // input: { type: "post" },
                         onProgressChange: (progress) => {
                           setProgress(progress);
                         },
                       });
-                      // save your data here
                       setfileUrl({
                         url: res.url,
-                        // thumbnailUrl: res.thumbnailUrl,
                       });
                     }
                   }}
