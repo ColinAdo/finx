@@ -16,18 +16,18 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 import { useMount } from "@/hooks";
+import { Input } from "@/components/ui/input";
 import { CreatePost } from "@/lib/schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Bell, CameraIcon } from "lucide-react";
-import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { CameraIcon } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 import { useEdgeStore } from "@/lib/edgestore";
-import { useState } from "react";
+import Image from "next/image";
 
 export default function Page() {
   const [file, setFile] = useState<File>();
