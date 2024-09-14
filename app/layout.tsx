@@ -5,6 +5,10 @@ import Provider from "@/redux/Provider";
 import { ThemeProvider } from "@/components/common/ThemeProvider";
 import { Navbar, Footer } from "@/components/common";
 import { Setup } from "@/components/utils";
+import { extractRouterConfig } from "uploadthing/server";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { Toaster } from "sonner";
+import { EdgeStoreProvider } from "@/lib/edgestore";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -41,9 +45,10 @@ export default function RootLayout({
           >
             <Setup />
             {/* <Navbar /> */}
-            <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 my-8">
-              {children}
-            </div>
+            {/* <div className="mx-auto max-h-7xl px-2 sm:px-6 lg:px-8 my-8"> */}
+            <EdgeStoreProvider>{children}</EdgeStoreProvider>
+            <Toaster position="top-center" richColors />
+            {/* </div> */}
             {/* <Footer /> */}
           </ThemeProvider>
         </Provider>
