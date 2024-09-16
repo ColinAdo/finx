@@ -39,6 +39,15 @@ export const PasswordResetSchema = z.object({
     .email(),
 });
 
+export const PasswordResetConfirmSchema = z.object({
+  new_password: z.string().min(8, {
+    message: "password must be at least 8 characters.",
+  }),
+  re_new_password: z.string().min(8, {
+    message: "password must be at least 8 characters.",
+  }),
+});
+
 export const PostSchema = z.object({
   id: z.string(),
   fileUrl: z.string().url(),
