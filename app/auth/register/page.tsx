@@ -17,13 +17,18 @@ export default function Page() {
           src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
           className="mx-auto h-10 w-auto"
         />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight dark:text-gray-100 text-gray-900">
           Sign up for an account
         </h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
         <RegisterForm />
+        <div className="relative flex items-center my-3 font-bold">
+          <span className="flex-grow border-t border-gray-950 dark:border-gray-300"></span>
+          <span className="mx-3">OR</span>
+          <span className="flex-grow border-t border-gray-950 dark:border-gray-300"></span>
+        </div>
         <SocialButtons />
 
         <p className="mt-10 text-center text-sm text-gray-500">

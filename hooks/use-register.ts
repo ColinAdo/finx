@@ -2,6 +2,8 @@ import { useState, ChangeEvent, FormEvent } from "react";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useRegisterMutation } from "@/redux/features/authApiSlice";
+import { RegisterSchema } from "@/lib/schemas";
+import { z } from "zod";
 
 export default function useRegister() {
   const router = useRouter();
@@ -21,10 +23,8 @@ export default function useRegister() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    register({ username, email, password, re_password })
+  const onSubmit = (data: z.infer<typeof RegisterSchema>) => {
+    register({ ...data })
       .unwrap()
       .then(() => {
         toast.success("Please check your email to activate your account");

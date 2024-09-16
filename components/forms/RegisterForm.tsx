@@ -1,9 +1,13 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { ReuseForm } from "@/components/forms";
 import { useRegister } from "@/hooks";
-import { Form } from "@/components/forms";
+import { RegisterSchema } from "@/lib/schemas";
 
-export default function RegiserForm() {
+export default function ReuseRegisterForm() {
   const {
     username,
     email,
@@ -13,43 +17,55 @@ export default function RegiserForm() {
     onChange,
     onSubmit,
   } = useRegister();
+  const form = useForm<z.infer<typeof RegisterSchema>>({
+    resolver: zodResolver(RegisterSchema),
+    defaultValues: {
+      username: username,
+      email: email,
+      password: password,
+      re_password: re_password,
+    },
+  });
+
   const config = [
     {
-      lebalText: "Username",
-      lebalId: "username",
+      control: form.control,
+      name: "username",
+      formLabel: "Username",
+      placeholder: "Enter your username",
       type: "text",
-      value: username,
-      required: true,
     },
     {
-      lebalText: "Email address",
-      lebalId: "email",
+      control: form.control,
+      name: "email",
+      formLabel: "Email address",
+      placeholder: "Enter your email address",
       type: "email",
-      value: email,
-      required: true,
     },
     {
-      lebalText: "Password",
-      lebalId: "password",
+      control: form.control,
+      name: "password",
+      formLabel: "Password",
+      placeholder: "Enter your password",
       type: "password",
-      value: password,
-      required: true,
     },
     {
-      lebalText: "Confirm password",
-      lebalId: "re_password",
+      control: form.control,
+      name: "re_password",
+      formLabel: "Confirm password",
+      placeholder: "Enter your username",
       type: "password",
-      value: re_password,
-      required: true,
     },
   ];
+
   return (
-    <Form
-      btnText="Sign up"
+    <ReuseForm
       config={config}
-      isLoading={isLoading}
-      onChange={onChange}
+      form={form}
+      schema={RegisterSchema}
       onSubmit={onSubmit}
+      btnText="Submit"
+      isLoading={isLoading}
     />
   );
 }
