@@ -11,6 +11,10 @@ interface Config<TSchema extends ZodType> {
   formLabel: string;
   placeholder: string;
   type?: string;
+  link?: {
+    linkText: string;
+    linkUrl: string;
+  };
 }
 
 interface Props<TSchema extends ZodType> {
@@ -41,6 +45,7 @@ export default function MyFormComponent<TSchema extends ZodType>({
             control={input.control}
             formLabel={input.formLabel}
             placeholder={input.placeholder}
+            link={input.link}
           />
         ))}
 

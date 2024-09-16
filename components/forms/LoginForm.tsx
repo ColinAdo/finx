@@ -1,37 +1,51 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { ReuseForm } from "@/components/forms";
 import { useLogin } from "@/hooks";
-import { Form } from "@/components/forms";
+import { LoginSchema } from "@/lib/schemas";
 
-export default function LoginForm() {
+export default function RegisterForm() {
   const { email, password, isLoading, onChange, onSubmit } = useLogin();
+  const form = useForm<z.infer<typeof LoginSchema>>({
+    resolver: zodResolver(LoginSchema),
+    defaultValues: {
+      email: email,
+      password: password,
+    },
+  });
+
   const config = [
     {
-      lebalText: "Email address",
-      lebalId: "email",
+      control: form.control,
+      name: "email",
+      formLabel: "Email address",
+      placeholder: "Enter your email address",
       type: "email",
-      value: email,
-      required: true,
     },
     {
-      lebalText: "Password",
-      lebalId: "password",
+      control: form.control,
+      name: "password",
+      formLabel: "Password",
+      placeholder: "Enter your password",
       type: "password",
-      value: password,
       link: {
-        linkText: "Forgot password?",
+        linkText: "Forgot password",
         linkUrl: "/password-reset",
       },
-      required: true,
     },
   ];
+
   return (
-    <Form
-      btnText="Sign in"
+    <ReuseForm
       config={config}
-      isLoading={isLoading}
-      onChange={onChange}
+      form={form}
+      schema={LoginSchema}
       onSubmit={onSubmit}
+      btnText="Submit"
+      isLoading={isLoading}
     />
   );
 }

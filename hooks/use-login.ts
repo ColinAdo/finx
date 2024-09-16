@@ -4,6 +4,8 @@ import { useRouter } from "next/navigation";
 import { useLoginMutation } from "@/redux/features/authApiSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { setAuth } from "@/redux/features/authSlice";
+import { LoginSchema } from "@/lib/schemas";
+import { z } from "zod";
 
 export default function useLogin() {
   const dispatch = useAppDispatch();
@@ -22,10 +24,8 @@ export default function useLogin() {
     setFormData({ ...formData, [name]: value });
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    login({ email, password })
+  const onSubmit = (data: z.infer<typeof LoginSchema>) => {
+    login({ ...data })
       .unwrap()
       .then(() => {
         dispatch(setAuth());
