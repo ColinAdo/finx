@@ -30,6 +30,15 @@ export const LoginSchema = z.object({
   }),
 });
 
+export const PasswordResetSchema = z.object({
+  email: z
+    .string()
+    .min(12, {
+      message: "email must be at least 12 characters.",
+    })
+    .email(),
+});
+
 export const PostSchema = z.object({
   id: z.string(),
   fileUrl: z.string().url(),

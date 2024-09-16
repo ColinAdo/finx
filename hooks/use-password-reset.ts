@@ -1,6 +1,8 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { toast } from "react-toastify";
 import { usePasswordRestMutation } from "@/redux/features/authApiSlice";
+import { PasswordResetSchema } from "@/lib/schemas";
+import { z } from "zod";
 
 export default function usePassowrdReset() {
   const [passwordReset, { isLoading }] = usePasswordRestMutation();
@@ -11,10 +13,8 @@ export default function usePassowrdReset() {
     setEmail(event.target.value);
   };
 
-  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    passwordReset(email)
+  const onSubmit = (data: z.infer<typeof PasswordResetSchema>) => {
+    passwordReset(data.email)
       .unwrap()
       .then(() => {
         toast.success("Please check your email for a link");
