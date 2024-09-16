@@ -7,7 +7,7 @@ import { ReuseForm } from "@/components/forms";
 import { useRegister } from "@/hooks";
 import { RegisterSchema } from "@/lib/schemas";
 
-export default function ReuseRegisterForm() {
+export default function RegisterForm() {
   const {
     username,
     email,
