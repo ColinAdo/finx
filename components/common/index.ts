@@ -12,3 +12,5 @@ export { default as SocialButton } from "./SocialButton";
 export { default as SocialButtons } from "./SocialButtons";
 export { default as UserAvatar } from "./UserAvatar";
 export { default as ProfileLink } from "./ProfileLink";
+export { default as FormDialog } from "./FormDialog";
+export { default as FormButton } from "./FormButton";
