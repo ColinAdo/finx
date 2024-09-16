@@ -18,6 +18,18 @@ export const RegisterSchema = z.object({
   }),
 });
 
+export const LoginSchema = z.object({
+  email: z
+    .string()
+    .min(12, {
+      message: "email must be at least 12 characters.",
+    })
+    .email(),
+  password: z.string().min(8, {
+    message: "password must be at least 8 characters.",
+  }),
+});
+
 export const PostSchema = z.object({
   id: z.string(),
   fileUrl: z.string().url(),
