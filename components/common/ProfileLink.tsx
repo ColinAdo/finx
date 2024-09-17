@@ -20,7 +20,7 @@ export default function ProfileLink() {
     );
   }
 
-  const href = `/dashboard/profile/${data?.profile.owner}/`;
+  const href = `/dashboard/profile/${data?.profile.username}/`;
   const isActive = pathname === href;
 
   return (

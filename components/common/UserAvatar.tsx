@@ -8,7 +8,7 @@ import { AvatarProps } from "@radix-ui/react-avatar";
 type Props = Partial<AvatarProps>;
 
 export default function UserAvatar({ ...avaterProps }: Props) {
-  const { data, isLoading } = useRetrieveProfileQuery();
+  const { data: profile, isLoading } = useRetrieveProfileQuery();
 
   if (isLoading) {
     return (
@@ -17,16 +17,17 @@ export default function UserAvatar({ ...avaterProps }: Props) {
       </div>
     );
   }
+  console.log("Context data: ", profile);
 
-  const profileUrl = `/dashboard/profile/${data?.profile.owner}/`;
+  const profileUrl = `/dashboard/profile/${profile?.profile.username}/`;
 
   return (
     <Link href={profileUrl}>
       <Avatar className="relative h-6 w-6 cursor-pointer">
         <Image
-          src={data?.profile.profile_picture || "/default-avatar.png"}
+          src={profile?.profile.profile_picture || "/default-avatar.png"}
           fill
-          alt={`${data?.profile.owner}'s avatar`}
+          alt={`${profile?.profile.username}'s avatar`}
           className="rounded-full object-cover"
         />
       </Avatar>
