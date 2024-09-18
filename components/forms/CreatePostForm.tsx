@@ -9,7 +9,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import { useRouter } from "next/navigation";
 import { useState, FormEvent } from "react";
 import { useMount } from "@/hooks";
 import { Input } from "@/components/ui/input";
@@ -21,11 +20,15 @@ import { toast } from "sonner";
 import { z } from "zod";
 import { useEdgeStore } from "@/lib/edgestore";
 import Image from "next/image";
-import { useCreatePostMutation } from "@/redux/features/postSlice";
+import {
+  useCreatePostMutation,
+  useRetrievePostQuery,
+} from "@/redux/features/postSlice";
 import { FormButton } from "@/components/common";
 
 export default function CreatePostForm() {
   const [createPost] = useCreatePostMutation();
+  const { refetch } = useRetrievePostQuery();
 
   const [file, setFile] = useState<File>();
   const [fileName, setFileName] = useState<string>("");
@@ -36,7 +39,6 @@ export default function CreatePostForm() {
   }>();
   const { edgestore } = useEdgeStore();
 
-  const router = useRouter();
   const mount = useMount();
   const form = useForm<z.infer<typeof CreatePost>>({
     resolver: zodResolver(CreatePost),
@@ -64,7 +66,7 @@ export default function CreatePostForm() {
     })
       .unwrap()
       .then(() => {
-        router.push("/dashboard");
+        refetch();
         toast.success("Posted successfully");
       })
       .catch(() => {
