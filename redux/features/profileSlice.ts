@@ -2,7 +2,7 @@ import { apiSlice } from "../services/apiSlice";
 
 interface ProfileData {
   profile: {
-    owner: string;
+    username: string;
     profile_picture: string;
     profession: string;
     github: string;
