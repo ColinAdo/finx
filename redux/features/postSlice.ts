@@ -43,7 +43,7 @@ const postSlice = apiSlice.injectEndpoints({
         body: { caption, fileUrl },
       }),
     }),
-    retrievePost: builder.query<Post[], void>({
+    getPost: builder.query<Post[], void>({
       query: () => ({
         url: "/posts/",
       }),
@@ -57,8 +57,5 @@ const postSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useCreatePostMutation,
-  useRetrievePostQuery,
-  useDeletePostMutation,
-} = postSlice;
+export const { useCreatePostMutation, useGetPostQuery, useDeletePostMutation } =
+  postSlice;
