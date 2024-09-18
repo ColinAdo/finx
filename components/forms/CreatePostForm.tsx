@@ -22,14 +22,16 @@ import { useEdgeStore } from "@/lib/edgestore";
 import Image from "next/image";
 import {
   useCreatePostMutation,
-  useRetrievePostQuery,
+  useGetPostQuery,
 } from "@/redux/features/postSlice";
 import { FormButton } from "@/components/common";
+import { useRouter } from "next/navigation";
 
 export default function CreatePostForm() {
   const [createPost] = useCreatePostMutation();
-  const { refetch } = useRetrievePostQuery();
+  const { refetch } = useGetPostQuery();
 
+  const router = useRouter();
   const [file, setFile] = useState<File>();
   const [fileName, setFileName] = useState<string>("");
   const [progress, setProgress] = useState(0);
@@ -67,6 +69,7 @@ export default function CreatePostForm() {
       .unwrap()
       .then(() => {
         refetch();
+        router.push("/dashboard");
         toast.success("Posted successfully");
       })
       .catch(() => {
