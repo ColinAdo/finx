@@ -22,6 +22,13 @@ interface Like {
   created_at: Date | null;
 }
 
+interface Bookmark {
+  id: number;
+  user: User;
+  post: number;
+  created_at: Date | null;
+}
+
 interface Post {
   id: number;
   author: User;
@@ -32,6 +39,8 @@ interface Post {
   comments_count: number;
   likes: Like[];
   likes_count: number;
+  bookmarks: Bookmark[];
+  bookmark_count: number;
 }
 
 const postSlice = apiSlice.injectEndpoints({
@@ -60,6 +69,12 @@ const postSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    bookmarkPost: builder.mutation<void, number>({
+      query: (postId) => ({
+        url: `/bookmark/${postId}/`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -68,4 +83,5 @@ export const {
   useGetPostQuery,
   useDeletePostMutation,
   useLikePostMutation,
+  useBookmarkPostMutation,
 } = postSlice;
