@@ -5,4 +5,5 @@ export { default as PostOptions } from "./PostOptions";
 export { default as ActionIcons } from "./ActionIcons";
 export { default as LikeButton } from "./LikeButton";
 export { default as ShareButton } from "./ShareButton";
+export { default as BookmarkButton } from "./BookmarkButton";
 export { default as PostActions } from "./PostActions";

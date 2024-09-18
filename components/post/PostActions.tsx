@@ -1,8 +1,12 @@
 import { cn } from "@/lib/utils";
 import { MessageCircle } from "lucide-react";
 import Link from "next/link";
-import { LikeButton, ActionIcons, ShareButton } from "@/components/post";
-// import BookmarkButton from "./BookmarkButton";
+import {
+  LikeButton,
+  ActionIcons,
+  ShareButton,
+  BookmarkButton,
+} from "@/components/post";
 
 interface User {
   id: number;
@@ -12,10 +16,16 @@ interface Like {
   user: User;
 }
 
+interface Bookmark {
+  user: User;
+}
+
 interface Post {
   id: number;
   likes: Like[];
   likes_count: number;
+  bookmarks: Bookmark[];
+  bookmark_count: number;
 }
 
 interface Props {
@@ -33,7 +43,7 @@ function PostActions({ post, className }: Props) {
         </ActionIcons>
       </Link>
       <ShareButton postId={post.id} />
-      {/* <BookmarkButton post={post} userId={userId} /> */}
+      <BookmarkButton post={post} />
     </div>
   );
 }

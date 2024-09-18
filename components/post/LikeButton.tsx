@@ -54,7 +54,7 @@ export default function LikeButton({ post }: { post: Post }) {
           <Heart
             className={cn("h-6 w-6", {
               "text-red-500 fill-red-500": liked,
-              "text-gray-100 ": !liked,
+              "dark:text-gray-100 text-gray-950": !liked,
             })}
           />
         </ActionIcons>
