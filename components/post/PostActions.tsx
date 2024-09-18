@@ -1,9 +1,7 @@
-// import { PostWithExtras } from "@/lib/definitions";
 import { cn } from "@/lib/utils";
 import { MessageCircle } from "lucide-react";
 import Link from "next/link";
-import { LikeButton, ActionIcons } from "@/components/post";
-// import ShareButton from "./ShareButton";
+import { LikeButton, ActionIcons, ShareButton } from "@/components/post";
 // import BookmarkButton from "./BookmarkButton";
 
 interface User {
@@ -34,8 +32,8 @@ function PostActions({ post, className }: Props) {
           <MessageCircle className={"h-6 w-6"} />
         </ActionIcons>
       </Link>
-      {/* <ShareButton postId={post.id} />
-      <BookmarkButton post={post} userId={userId} /> */}
+      <ShareButton postId={post.id} />
+      {/* <BookmarkButton post={post} userId={userId} /> */}
     </div>
   );
 }
