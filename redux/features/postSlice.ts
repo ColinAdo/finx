@@ -54,8 +54,18 @@ const postSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    likePost: builder.mutation<void, number>({
+      query: (postId) => ({
+        url: `/like/${postId}/`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
-export const { useCreatePostMutation, useGetPostQuery, useDeletePostMutation } =
-  postSlice;
+export const {
+  useCreatePostMutation,
+  useGetPostQuery,
+  useDeletePostMutation,
+  useLikePostMutation,
+} = postSlice;
