@@ -26,6 +26,7 @@ interface Post {
   likes_count: number;
   bookmarks: Bookmark[];
   bookmark_count: number;
+  comments_count: number;
 }
 
 interface Props {
@@ -37,11 +38,14 @@ function PostActions({ post, className }: Props) {
   return (
     <div className={cn("relative flex items-start w-full gap-x-2", className)}>
       <LikeButton post={post} />
-      <Link href={`/dashboard/p/${post.id}`}>
-        <ActionIcons>
-          <MessageCircle className={"h-6 w-6"} />
-        </ActionIcons>
-      </Link>
+      <div className="flex items-center space-x-2">
+        <Link href={`/dashboard/p/${post.id}`}>
+          <ActionIcons>
+            <MessageCircle className={"h-6 w-6"} />
+          </ActionIcons>
+        </Link>
+        {post.comments_count > 0 ? post.comments_count : ""}
+      </div>
       <ShareButton postId={post.id} />
       <BookmarkButton post={post} />
     </div>

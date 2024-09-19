@@ -46,7 +46,7 @@ export default function LikeButton({ post }: { post: Post }) {
   };
 
   return (
-    <div className="flex flex-col">
+    <div className="flex items-center space-x-2">
       <form onSubmit={handleSubmit}>
         <input type="hidden" name="post" value={post.id} />
 
@@ -60,9 +60,7 @@ export default function LikeButton({ post }: { post: Post }) {
         </ActionIcons>
       </form>
       {post.likes_count > 0 && (
-        <p className="text-sm font-bold dark:text-white">
-          {post.likes_count} {post.likes_count === 1 ? "like" : "likes"}
-        </p>
+        <p className="text-sm font-bold dark:text-white">{post.likes_count}</p>
       )}
     </div>
   );
