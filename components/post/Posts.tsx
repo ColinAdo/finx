@@ -6,11 +6,13 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { PostOptions } from "@/components/post";
 import { useGetPostQuery } from "@/redux/features/postSlice";
+import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { Spinner } from "@/components/common";
 import { Avatar } from "@/components/ui/avatar";
-import { Timestamp, PostActions } from "@/components/post";
+import { Timestamp, PostActions, Comments } from "@/components/post";
 
 export default function Post() {
+  const { data: user } = useRetrieveProfileQuery();
   const { data: posts, isLoading } = useGetPostQuery();
 
   if (isLoading) {
@@ -67,16 +69,16 @@ export default function Post() {
           <PostActions post={post} className="px-3 sm:px-0" />
           {post.caption && (
             <div className="text-sm leading-none flex items-center space-x-2 font-medium px-3 sm:px-0">
-              <Link
-                href={`/dashboard/${post.author.username}`}
-                className="font-bold"
-              >
-                {post.author.username}
-              </Link>
               <p>{post.caption}</p>
             </div>
           )}
-          Comment
+
+          <Comments
+            postId={post.id}
+            comments={post.comments}
+            commentsCount={post.comments_count}
+            profilePic={user?.profile.profile_picture}
+          />
         </div>
       ))}
     </div>
