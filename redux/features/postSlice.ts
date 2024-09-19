@@ -75,6 +75,13 @@ const postSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    commentOnPost: builder.mutation({
+      query: ({ post, comment, comment_image }) => ({
+        url: "/comment/",
+        method: "POST",
+        body: { post, comment, comment_image },
+      }),
+    }),
   }),
 });
 
@@ -84,4 +91,5 @@ export const {
   useDeletePostMutation,
   useLikePostMutation,
   useBookmarkPostMutation,
+  useCommentOnPostMutation,
 } = postSlice;
