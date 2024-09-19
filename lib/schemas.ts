@@ -49,7 +49,7 @@ export const PasswordResetConfirmSchema = z.object({
 });
 
 export const PostSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   fileUrl: z.string().url(),
   caption: z.string().optional(),
 });
@@ -67,9 +67,10 @@ export const BookmarkSchema = z.object({
 });
 
 export const CommentSchema = z.object({
-  id: z.string(),
-  body: z.string(),
-  postId: z.string(),
+  id: z.number(),
+  post: z.number(),
+  comment: z.string().optional(),
+  comment_image: z.string().optional(),
 });
 
 export const CreateComment = CommentSchema.omit({ id: true });
