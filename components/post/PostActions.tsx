@@ -44,7 +44,11 @@ function PostActions({ post, className }: Props) {
             <MessageCircle className={"h-6 w-6"} />
           </ActionIcons>
         </Link>
-        {post.comments_count > 0 ? post.comments_count : ""}
+        {post.comments_count > 0 && (
+          <p className="text-sm font-bold dark:text-white">
+            {post.comments_count}
+          </p>
+        )}
       </div>
       <ShareButton postId={post.id} />
       <BookmarkButton post={post} />
