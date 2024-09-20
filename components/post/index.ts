@@ -8,3 +8,8 @@ export { default as ShareButton } from "./ShareButton";
 export { default as BookmarkButton } from "./BookmarkButton";
 export { default as PostActions } from "./PostActions";
 export { default as Comments } from "./Comments";
+export { default as MiniPost } from "./MiniPost";
+export { default as Comment } from "./Comment";
+export { default as CommentForm } from "./CommentForm";
+export { default as CommentOptions } from "./CommentOptions";
+export { default as ViewPost } from "./ViewPost";
