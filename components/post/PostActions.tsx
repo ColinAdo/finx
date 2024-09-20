@@ -22,6 +22,7 @@ interface Bookmark {
 
 interface Post {
   id: number;
+  fileUrl: string;
   likes: Like[];
   likes_count: number;
   bookmarks: Bookmark[];
