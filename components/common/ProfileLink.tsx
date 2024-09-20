@@ -12,14 +12,6 @@ export default function ProfileLink() {
   const pathname = usePathname();
   const { data, isLoading } = useRetrieveProfileQuery();
 
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center">
-        <Spinner sm />
-      </div>
-    );
-  }
-
   const href = `/dashboard/profile/${data?.profile.username}/`;
   const isActive = pathname === href;
 
@@ -32,9 +24,13 @@ export default function ProfileLink() {
         size: "lg",
       })}
     >
-      <UserAvatar
-        className={`h-6 w-6 ${isActive && "border-2 border-white"}`}
-      />
+      {isLoading ? (
+        <Spinner sm />
+      ) : (
+        <UserAvatar
+          className={`h-6 w-6 ${isActive && "border-2 border-white"}`}
+        />
+      )}
 
       <p
         className={`${cn("hidden lg:block", {

@@ -2,26 +2,16 @@
 
 import Image from "next/image";
 import Link from "next/link";
-// import Comments from "./Comments";
 import { Card } from "@/components/ui/card";
 import { PostOptions } from "@/components/post";
 import { useGetPostQuery } from "@/redux/features/postSlice";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
-import { Spinner } from "@/components/common";
 import { Avatar } from "@/components/ui/avatar";
 import { Timestamp, PostActions, Comments } from "@/components/post";
 
 export default function Post() {
   const { data: user } = useRetrieveProfileQuery();
-  const { data: posts, isLoading } = useGetPostQuery();
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center my-8">
-        <Spinner lg />
-      </div>
-    );
-  }
+  const { data: posts } = useGetPostQuery();
 
   return (
     <div>
@@ -29,14 +19,23 @@ export default function Post() {
         <div className="flex flex-col space-y-2.5">
           <div className="flex items-center justify-between px-3 sm:px-0">
             <div className="flex space-x-3 items-center">
-              <Link href={`/dashboard/profile/username`}>
+              <Link href={`/dashboard/profile/${post.author.username}`}>
                 <Avatar className="relative h-6 w-6 cursor-pointer">
-                  <Image
-                    src={`${post.author.profile_picture}`}
-                    fill
-                    alt={`username's avatar`}
-                    className="rounded-full object-cover"
-                  />
+                  {post.author.profile_picture ? (
+                    <Image
+                      src={post.author.profile_picture}
+                      fill
+                      alt={`${post.author.username}'s avatar`}
+                      className="rounded-full object-cover"
+                    />
+                  ) : (
+                    <Image
+                      src="/fallback-avatar.png"
+                      fill
+                      alt="Fallback avatar"
+                      className="rounded-full object-cover"
+                    />
+                  )}
                 </Avatar>
               </Link>
               <div className="text-sm">
@@ -59,12 +58,21 @@ export default function Post() {
             <PostOptions post={post} userId={post.author.id} />
           </div>
           <Card className="relative h-[450px] w-full overflow-hidden rounded-none sm:rounded-md">
-            <Image
-              src={`${post.fileUrl}`}
-              alt="Post Image"
-              fill
-              className="sm:rounded-md object-cover"
-            />
+            {post.fileUrl ? (
+              <Image
+                src={post.fileUrl}
+                alt="Post Image"
+                fill
+                className="sm:rounded-md object-cover"
+              />
+            ) : (
+              <Image
+                src="/fallback-image.png"
+                alt="Fallback Image"
+                fill
+                className="sm:rounded-md object-cover"
+              />
+            )}
           </Card>
           <PostActions post={post} className="px-3 sm:px-0" />
           {post.caption && (

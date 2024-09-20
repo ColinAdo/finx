@@ -153,12 +153,21 @@ export default function Comments({
           className="border-b border-gray-300 dark:border-neutral-800 pb-3 py-1 flex items-center space-x-2"
         >
           <Avatar className="relative h-4 w-4 cursor-pointer">
-            <Image
-              src={`${profilePic}`}
-              fill
-              alt="profilePic"
-              className="rounded-full object-cover"
-            />
+            {profilePic ? (
+              <Image
+                src={`${profilePic}`}
+                fill
+                alt="profilePic"
+                className="rounded-full object-cover"
+              />
+            ) : (
+              <Image
+                src="/default.png"
+                fill
+                alt="profilePic"
+                className="rounded-full object-cover"
+              />
+            )}
           </Avatar>
           <FormField
             control={form.control}

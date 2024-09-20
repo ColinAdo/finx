@@ -8,28 +8,23 @@ import { AvatarProps } from "@radix-ui/react-avatar";
 type Props = Partial<AvatarProps>;
 
 export default function UserAvatar({ ...avaterProps }: Props) {
-  const { data: profile, isLoading } = useRetrieveProfileQuery();
-
-  if (isLoading) {
-    return (
-      <div className="flex justify-center items-center">
-        <Spinner sm />
-      </div>
-    );
-  }
-  console.log("Context data: ", profile);
+  const { data: profile } = useRetrieveProfileQuery();
 
   const profileUrl = `/dashboard/profile/${profile?.profile.username}/`;
 
   return (
     <Link href={profileUrl}>
       <Avatar className="relative h-6 w-6 cursor-pointer">
-        <Image
-          src={profile?.profile.profile_picture || "/default-avatar.png"}
-          fill
-          alt={`${profile?.profile.username}'s avatar`}
-          className="rounded-full object-cover"
-        />
+        {profile?.profile.profile_picture ? (
+          <Image
+            src={profile?.profile.profile_picture}
+            fill
+            alt={`${profile?.profile.username}'s avatar`}
+            className="rounded-full object-cover"
+          />
+        ) : (
+          <Spinner sm />
+        )}
       </Avatar>
     </Link>
   );
