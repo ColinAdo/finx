@@ -9,8 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
-import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { MiniPost, Comment, CommentForm } from "@/components/post";
+import { useRetrievePostQuery } from "@/redux/features/postSlice";
 
 interface User {
   id: number;
@@ -63,7 +63,7 @@ interface Props {
 }
 
 export default function PostView({ postId, post }: Props) {
-  const { data } = useRetrieveProfileQuery();
+  const { refetch } = useRetrievePostQuery(postId);
   const pathname = usePathname();
   const isPostModal = pathname === `/dashboard/p/${postId}`;
   const router = useRouter();
@@ -73,6 +73,7 @@ export default function PostView({ postId, post }: Props) {
   const mount = useMount();
 
   if (!mount) return null;
+  refetch();
 
   return (
     <Dialog open={isPostModal} onOpenChange={(open) => !open && router.back()}>
