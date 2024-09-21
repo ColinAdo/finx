@@ -11,7 +11,6 @@ import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { MiniPost, Comment, CommentForm } from "@/components/post";
-import { ViewPost } from "@/components/post";
 
 interface User {
   id: number;
