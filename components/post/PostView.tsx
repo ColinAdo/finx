@@ -1,9 +1,7 @@
 "use client";
 
-// import CommentForm from "@/components/CommentForm";
 import { PostActions } from "@/components/post";
 import { UserAvatar } from "@/components/common";
-// import ViewPost from "@/components/ViewPost";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useMount } from "@/hooks";
