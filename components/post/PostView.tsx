@@ -117,7 +117,6 @@ export default function PostView({ postId, post }: Props) {
             postId={post.id}
             profilePic={post.author.profile_picture}
             className="hidden md:inline-flex"
-            inputRef={inputRef}
           />
         </div>
         <div className="relative overflow-hidden h-96 md:h-[500px] lg:h-[700px] xl:h-[800px] max-w-3xl w-full">
@@ -136,7 +135,6 @@ export default function PostView({ postId, post }: Props) {
             profilePic={post.author.profile_picture}
             postId={post.id}
             className="md:hidden"
-            inputRef={inputRef}
           />
           <ViewPost className="md:hidden" />
         </div>
