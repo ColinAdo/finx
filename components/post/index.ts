@@ -13,3 +13,5 @@ export { default as Comment } from "./Comment";
 export { default as CommentForm } from "./CommentForm";
 export { default as CommentOptions } from "./CommentOptions";
 export { default as ViewPost } from "./ViewPost";
+export { default as CommentView } from "./CommentView";
+export { default as PostView } from "./PostView";

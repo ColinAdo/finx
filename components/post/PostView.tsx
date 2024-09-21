@@ -103,7 +103,6 @@ export default function PostView({ postId, post }: Props) {
               </>
             )}
           </ScrollArea>
-          <ViewPost className="hidden md:flex border-b" />
           <div className="px-2 hidden md:block mt-auto border-b p-2.5">
             <PostActions post={post} />
             <time className="text-[11px]  uppercase text-zinc-500 font-medium">
@@ -136,7 +135,6 @@ export default function PostView({ postId, post }: Props) {
             postId={post.id}
             className="md:hidden"
           />
-          <ViewPost className="md:hidden" />
         </div>
       </DialogContent>
     </Dialog>

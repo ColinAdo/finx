@@ -40,7 +40,13 @@ function PostActions({ post, className }: Props) {
     <div className={cn("relative flex items-start w-full gap-x-2", className)}>
       <LikeButton post={post} />
       <div className="flex items-center space-x-2">
-        <Link href={`/dashboard/p/${post.id}`}>
+        <Link
+          href={
+            post.comments_count > 0
+              ? `/dashboard/c/${post.id}`
+              : `/dashboard/p/${post.id}`
+          }
+        >
           <ActionIcons>
             <MessageCircle className={"h-6 w-6"} />
           </ActionIcons>
