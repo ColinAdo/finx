@@ -1,6 +1,6 @@
 "use client";
 
-import PostView from "@/components/post/PostView";
+import { PostView } from "@/components/post";
 import { notFound } from "next/navigation";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
 
@@ -15,7 +15,6 @@ export default function PostModal({ params: { id } }: Props) {
 
   if (!post) {
     return;
-    // return <h2>Error fetching</h2>; notFound();
   }
 
   return <PostView postId={id} post={post} />;
