@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { Heart } from "lucide-react";
 import { toast } from "sonner";
-import { FormEvent, useOptimistic, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { ActionIcons } from "@/components/post";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import {
@@ -31,7 +31,9 @@ export default function LikeButton({ post }: { post: Post }) {
   const { data } = useRetrieveUserQuery();
 
   const initialLiked = post.likes.some((like) => like.user.id === data?.id);
-  const [liked, setLiked] = useState(initialLiked);
+  const [liked, setLiked] = useState(
+    localStorage.getItem(`${post.id}-liked`) === "true" ? true : initialLiked
+  );
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,10 +42,15 @@ export default function LikeButton({ post }: { post: Post }) {
       await likePost(post.id).unwrap();
       refetch();
       setLiked((prevLiked) => !prevLiked);
+      localStorage.setItem(`${post.id}-liked`, String(!liked));
     } catch (error) {
       toast.error("Error liking post");
     }
   };
+
+  useEffect(() => {
+    localStorage.setItem(`${post.id}-liked`, String(liked));
+  }, [liked]);
 
   return (
     <div className="flex items-center space-x-2">
