@@ -40,15 +40,15 @@ interface Props {
   postId: number;
   profilePic: string | undefined;
   className?: string;
-  inputRef?: React.Ref<HTMLInputElement>;
+  // inputRef?: React.Ref<HTMLInputElement>;
 }
 
 export default function Comments({
   postId,
   profilePic,
   className,
-  inputRef,
-}: Props) {
+}: // inputRef,
+Props) {
   const [progress, setProgress] = useState(0);
   const [file, setFile] = useState<File | null>(null);
 
@@ -116,7 +116,6 @@ export default function Comments({
   };
 
   return (
-    // <div className="space-y-0.5 px-3 sm:px-0">
     <div>
       <Form {...form}>
         <form
