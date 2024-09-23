@@ -15,3 +15,5 @@ export { default as CommentOptions } from "./CommentOptions";
 export { default as ViewPost } from "./ViewPost";
 export { default as CommentView } from "./CommentView";
 export { default as PostView } from "./PostView";
+export { default as MorePosts } from "./MorePosts";
+export { default as PostsGrid } from "./PostsGrid";
