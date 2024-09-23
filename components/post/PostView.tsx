@@ -179,10 +179,12 @@ export default function PostView({ postId, post }: Props) {
                     </div>
                     <span className="text-sm font-thin">
                       <Link
-                        className="text-indigo-500"
+                        scroll={false}
+                        className="text-sm font-medium text-neutral-500"
                         href={`/dashboard/c/${post.id}`}
                       >
-                        read all {post.comments_count} Comment
+                        read all {post.comments_count}{" "}
+                        {post.comments_count > 1 ? "Comments" : "Comment"}
                       </Link>
                     </span>
                   </div>
