@@ -126,13 +126,20 @@ export default function PostView({ postId, post }: Props) {
 
           {post.comments.length > 0 && (
             <ScrollArea className="hidden md:block flex-1 py-1.5 border-b overflow-y-auto max-h-[300px]">
-              {post.comments.map((comment) => (
-                <Comment
-                  key={comment.id}
-                  comment={comment}
-                  inputRef={inputRef}
-                />
-              ))}
+              {post.comments
+                .slice()
+                .sort(
+                  (a, b) =>
+                    new Date(b.created_at).getTime() -
+                    new Date(a.created_at).getTime()
+                )
+                .map((comment) => (
+                  <Comment
+                    key={comment.id}
+                    comment={comment}
+                    inputRef={inputRef}
+                  />
+                ))}
             </ScrollArea>
           )}
 
@@ -147,24 +154,32 @@ export default function PostView({ postId, post }: Props) {
           </div>
 
           <div className="sm:hidden block flex-1 py-1.5 border-b overflow-y-auto max-h-[300px]">
-            {post.comments.slice(0, 1).map((comment) => (
-              <div className="group p-3 px-3.5  flex items-start space-x-2.5">
-                <Link href={`/dashboard/${comment.owner.username}`}>
-                  <UserAvatar />
-                </Link>
-                <div className="space-y-1.5">
-                  <div className="flex my-1 items-center space-x-1.5 leading-none text-sm">
-                    <Link
-                      href={`/dashboard/${comment.owner.username}`}
-                      className="font-semibold"
-                    >
-                      {comment.owner.username}
-                    </Link>
-                    <p className="font-medium">{comment.comment}</p>
-                    <span>
-                      {" "}
+            {post.comments
+              .slice()
+              .sort(
+                (a, b) =>
+                  new Date(b.created_at).getTime() -
+                  new Date(a.created_at).getTime()
+              )
+              .slice(0, 1)
+              .map((comment) => (
+                <div className="group p-3 px-3.5  flex items-start space-x-2.5">
+                  <Link href={`/dashboard/${comment.owner.username}`}>
+                    <UserAvatar />
+                  </Link>
+                  <div className="space-y-1.5">
+                    <div className="flex my-1 items-center space-x-1.5 leading-none text-sm">
                       <Link
-                        className="text-indigo-400"
+                        href={`/dashboard/${comment.owner.username}`}
+                        className="font-semibold"
+                      >
+                        {comment.owner.username}
+                      </Link>
+                      <p className="font-medium">{comment.comment}</p>
+                    </div>
+                    <span className="text-sm font-thin">
+                      <Link
+                        className="text-indigo-500"
                         href={`/dashboard/c/${post.id}`}
                       >
                         read all {post.comments_count} Comment
@@ -172,8 +187,7 @@ export default function PostView({ postId, post }: Props) {
                     </span>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
 
           <CommentForm

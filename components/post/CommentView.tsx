@@ -1,7 +1,5 @@
 "use client";
 
-import { PostActions } from "@/components/post";
-import { UserAvatar } from "@/components/common";
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useMount } from "@/hooks";
@@ -86,15 +84,22 @@ export default function CommentView({ postId, post }: Props) {
           <ScrollArea className="border-b flex-grow overflow-y-auto max-h-[350px] md:max-h-[350px]">
             {post.comments_count > 0 && (
               <>
-                {post.comments.map((comment) => {
-                  return (
-                    <Comment
-                      key={comment.id}
-                      comment={comment}
-                      inputRef={inputRef}
-                    />
-                  );
-                })}
+                {post.comments
+                  .slice()
+                  .sort(
+                    (a, b) =>
+                      new Date(b.created_at).getTime() -
+                      new Date(a.created_at).getTime()
+                  )
+                  .map((comment) => {
+                    return (
+                      <Comment
+                        key={comment.id}
+                        comment={comment}
+                        inputRef={inputRef}
+                      />
+                    );
+                  })}
               </>
             )}
           </ScrollArea>
