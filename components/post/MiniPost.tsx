@@ -57,24 +57,24 @@ function MiniPost({ post }: Props) {
   const href = `/dashboard/${username}`;
 
   return (
-    <div className="group p-3 px-3.5  flex items-start space-x-2.5">
+    <div className="group p-3 px-3.5 flex items-start space-x-2.5">
       <Link href={href}>
         <UserAvatar />
       </Link>
-      <div className="space-y-1.5">
-        <div className="flex items-center space-x-1.5 leading-none text-sm">
+      <div className="flex-1">
+        <div className="flex items-center justify-between space-x-1.5 leading-none text-sm">
           <Link href={href} className="font-semibold">
             {username}
           </Link>
           <p className="font-medium">{post.caption}</p>
-        </div>
-        <div className="flex h-5 items-center space-x-2.5">
-          <Timestamp createdAt={post.created_at} />
-          <PostOptions
-            post={post}
-            userId={post.author.id}
-            className="hidden group-hover:inline"
-          />
+          <div className="flex items-center space-x-2.5">
+            <Timestamp createdAt={post.created_at} />
+            <PostOptions
+              post={post}
+              userId={post.author.id}
+              className="hidden group-hover:inline"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -80,16 +80,10 @@ export default function CommentView({ postId, post }: Props) {
       <DialogContent className="flex flex-col md:flex-row items-start p-0 w-full max-w-md h-full max-h-[500px]">
         <div className="flex flex-col justify-between md:h-full md:order-2 w-full h-full">
           <DialogHeader className="flex border-b space-y-0 space-x-2.5 flex-row items-center py-4 pl-3.5 pr-6">
-            <Link href={href}>
-              <UserAvatar />
-            </Link>
-            <Link href={href} className="font-semibold text-sm">
-              {username}
-            </Link>
+            <MiniPost post={post} />
           </DialogHeader>
 
           <ScrollArea className="border-b flex-grow overflow-y-auto max-h-[350px] md:max-h-[350px]">
-            <MiniPost post={post} />
             {post.comments_count > 0 && (
               <>
                 {post.comments.map((comment) => {
