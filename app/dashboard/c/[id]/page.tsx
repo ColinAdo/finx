@@ -1,8 +1,9 @@
 "use client";
 
 import { CommentView } from "@/components/post";
-import { notFound } from "next/navigation";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
+import { Suspense } from "react";
+import { SinglePostSkeleton } from "@/components/common/Skeletons";
 
 interface Props {
   params: {
@@ -10,12 +11,18 @@ interface Props {
   };
 }
 
-export default function PostModal({ params: { id } }: Props) {
+export default function CommentModal({ params: { id } }: Props) {
   const { data: post } = useRetrievePostQuery(id);
 
   if (!post) {
     return;
   }
 
-  return <CommentView postId={id} post={post} />;
+  return (
+    <div>
+      <Suspense fallback={<SinglePostSkeleton />}>
+        <CommentView postId={id} post={post} />
+      </Suspense>
+    </div>
+  );
 }

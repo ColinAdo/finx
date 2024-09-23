@@ -1,8 +1,9 @@
 "use client";
 
 import { PostView } from "@/components/post";
-import { notFound } from "next/navigation";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
+import { Suspense } from "react";
+import { SinglePostSkeleton } from "@/components/common/Skeletons";
 
 interface Props {
   params: {
@@ -17,5 +18,11 @@ export default function PostModal({ params: { id } }: Props) {
     return;
   }
 
-  return <PostView postId={id} post={post} />;
+  return (
+    <div>
+      <Suspense fallback={<SinglePostSkeleton />}>
+        <PostView postId={id} post={post} />
+      </Suspense>
+    </div>
+  );
 }
