@@ -59,12 +59,14 @@ export default function Post() {
           </div>
           <Card className="relative h-[450px] w-full overflow-hidden rounded-none sm:rounded-md">
             {post.fileUrl ? (
-              <Image
-                src={post.fileUrl}
-                alt="Post Image"
-                fill
-                className="sm:rounded-md object-cover"
-              />
+              <Link href={`dashboard/p/${post.id}`}>
+                <Image
+                  src={post.fileUrl}
+                  alt="Post Image"
+                  fill
+                  className="sm:rounded-md object-cover"
+                />
+              </Link>
             ) : (
               <Image
                 src="/fallback-image.png"
