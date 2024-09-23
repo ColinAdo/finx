@@ -10,6 +10,7 @@ import { useRef } from "react";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { MiniPost, Comment, CommentForm } from "@/components/post";
 import { ViewPost } from "@/components/post";
+import { useRetrievePostQuery } from "@/redux/features/postSlice";
 
 interface User {
   id: number;
@@ -63,6 +64,7 @@ interface Props {
 
 export default function CommentView({ postId, post }: Props) {
   const { data } = useRetrieveProfileQuery();
+  const { refetch } = useRetrievePostQuery(postId);
   const pathname = usePathname();
   const isPostModal = pathname === `/dashboard/c/${postId}`;
   const router = useRouter();
@@ -72,6 +74,7 @@ export default function CommentView({ postId, post }: Props) {
   const mount = useMount();
 
   if (!mount) return null;
+  refetch();
 
   return (
     <Dialog open={isPostModal} onOpenChange={(open) => !open && router.back()}>
