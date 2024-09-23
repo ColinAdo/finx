@@ -1,16 +1,21 @@
 "use client";
 
-import { PostActions } from "@/components/post";
+import { PostActions, PostOptions } from "@/components/post";
 import { UserAvatar } from "@/components/common";
-import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useMount } from "@/hooks";
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
-import { MiniPost, Comment, CommentForm } from "@/components/post";
+import { Comment, CommentForm } from "@/components/post";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
+import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
+import { Card } from "@/components/ui/card";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
 
 interface User {
   id: number;
@@ -64,82 +69,120 @@ interface Props {
 
 export default function PostView({ postId, post }: Props) {
   const { refetch } = useRetrievePostQuery(postId);
-  const pathname = usePathname();
-  const isPostModal = pathname === `/dashboard/p/${postId}`;
-  const router = useRouter();
+  const { data } = useRetrieveProfileQuery();
   const inputRef = useRef<HTMLInputElement>(null);
-  const username = post?.author.username;
-  const href = `/dashboard/${username}`;
   const mount = useMount();
 
   if (!mount) return null;
   refetch();
 
   return (
-    <Dialog open={isPostModal} onOpenChange={(open) => !open && router.back()}>
-      <DialogContent className="flex gap-0 flex-col md:flex-row items-start p-0 md:max-w-3xl lg:max-w-5xl xl:max-w-6xl h-full max-h-[500px] lg:max-h-[700px] xl:max-h-[800px]">
-        <div className="flex flex-col justify-between md:h-full md:order-2 w-full max-w-md">
-          <DialogHeader className="flex border-b space-y-0 space-x-2.5 flex-row items-center py-4 pl-3.5 pr-6">
-            <MiniPost post={post} />
-          </DialogHeader>
+    <>
+      <Card className="w-full md:max-w-3xl lg:max-w-4xl md:flex mx-auto">
+        <div className="relative overflow-hidden h-[450px] w-full md:max-w-sm lg:max-w-lg">
+          <Image
+            src={post.fileUrl}
+            alt="Post preview"
+            fill
+            className="md:rounded-l-md object-cover"
+          />
+        </div>
 
-          <ScrollArea className="hidden md:inline border-b flex-1 py-1.5">
-            {post.comments.length === 0 && (
-              <div className="flex flex-col items-center gap-1.5 flex-1 justify-center">
-                <p className="text-xl py-auto lg:text-2xl font-extrabold">
-                  No comments yet.
-                </p>
-                <p className="text-sm font-medium">Start the conversation.</p>
-              </div>
-            )}
-            {post.comments_count > 0 && (
-              <>
-                {post.comments.map((comment) => {
-                  return (
-                    <Comment
-                      key={comment.id}
-                      comment={comment}
-                      inputRef={inputRef}
-                    />
-                  );
-                })}
-              </>
-            )}
-          </ScrollArea>
-          <div className="px-2 hidden md:block mt-auto border-b p-2.5">
+        <div className="flex w-full flex-col flex-1">
+          <div className="flex items-center justify-between border-b px-5 py-3">
+            <HoverCard>
+              <HoverCardTrigger asChild className="hidden md:block">
+                <Link
+                  className="font-semibold text-sm"
+                  href={`/dashboard/${post.author.username}`}
+                >
+                  {post.author.username}
+                </Link>
+              </HoverCardTrigger>
+              <PostOptions post={post} className="hidden md:block" />
+
+              <HoverCardContent>
+                <div className="flex items-center space-x-2">
+                  <UserAvatar className="h-14 w-14" />
+                  <div>
+                    <p className="font-bold">{post.author.username}</p>
+                    <p className="text-sm font-medium dark:text-neutral-400">
+                      {data?.profile.username}
+                    </p>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
+          </div>
+
+          {post.comments.length === 0 && (
+            <div className="hidden md:flex flex-col items-center gap-1.5 flex-1 justify-center">
+              <p className="text-xl lg:text-2xl font-extrabold">
+                No comments yet.
+              </p>
+              <p className="text-sm font-medium">Start the conversation.</p>
+            </div>
+          )}
+
+          {post.comments.length > 0 && (
+            <ScrollArea className="hidden md:block flex-1 py-1.5 border-b overflow-y-auto max-h-[300px]">
+              {post.comments.map((comment) => (
+                <Comment
+                  key={comment.id}
+                  comment={comment}
+                  inputRef={inputRef}
+                />
+              ))}
+            </ScrollArea>
+          )}
+
+          <div className="md:block px-2 mt-auto border-y p-2.5">
             <PostActions post={post} />
-            <time className="text-[11px]  uppercase text-zinc-500 font-medium">
+            <time className="text-[11px] uppercase text-zinc-500 font-medium">
               {new Date(post.created_at).toLocaleDateString("en-US", {
                 month: "long",
                 day: "numeric",
               })}
             </time>
           </div>
-          <CommentForm
-            postId={post.id}
-            profilePic={post.author.profile_picture}
-            className="hidden md:inline-flex"
-          />
-        </div>
-        <div className="relative overflow-hidden h-96 md:h-[500px] lg:h-[700px] xl:h-[800px] max-w-3xl w-full">
-          <Image
-            src={post?.fileUrl || "default.png"}
-            fill
-            objectFit="cover"
-            alt="Post Image"
-            className="md:rounded-l-md object-cover"
-          />
-        </div>
 
-        <div className="flex flex-col lg:collapse md:collapse w-full">
-          <PostActions post={post} className="md:hidden border-b p-2.5" />
+          <div className="sm:hidden block flex-1 py-1.5 border-b overflow-y-auto max-h-[300px]">
+            {post.comments.slice(0, 1).map((comment) => (
+              <div className="group p-3 px-3.5  flex items-start space-x-2.5">
+                <Link href={`/dashboard/${comment.owner.username}`}>
+                  <UserAvatar />
+                </Link>
+                <div className="space-y-1.5">
+                  <div className="flex my-1 items-center space-x-1.5 leading-none text-sm">
+                    <Link
+                      href={`/dashboard/${comment.owner.username}`}
+                      className="font-semibold"
+                    >
+                      {comment.owner.username}
+                    </Link>
+                    <p className="font-medium">{comment.comment}</p>
+                    <span>
+                      {" "}
+                      <Link
+                        className="text-indigo-400"
+                        href={`/dashboard/c/${post.id}`}
+                      >
+                        read all {post.comments_count} Comment
+                      </Link>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
           <CommentForm
-            profilePic={post.author.profile_picture}
+            profilePic={data?.profile.profile_picture}
             postId={post.id}
-            className="md:hidden"
+            className="md:inline-flex"
           />
         </div>
-      </DialogContent>
-    </Dialog>
+      </Card>
+    </>
   );
 }
