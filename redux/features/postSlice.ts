@@ -57,6 +57,11 @@ const postSlice = apiSlice.injectEndpoints({
         url: "/posts/",
       }),
     }),
+    getUserPost: builder.query<void, number>({
+      query: (postId) => ({
+        url: `/posts/${postId}/author-posts/`,
+      }),
+    }),
     retrievePost: builder.query<void, number>({
       query: (postId) => ({
         url: `/posts/${postId}/`,
@@ -98,4 +103,5 @@ export const {
   useLikePostMutation,
   useBookmarkPostMutation,
   useCommentOnPostMutation,
+  useGetUserPostQuery,
 } = postSlice;
