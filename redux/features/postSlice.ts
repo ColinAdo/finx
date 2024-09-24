@@ -73,6 +73,13 @@ const postSlice = apiSlice.injectEndpoints({
         method: "DELETE",
       }),
     }),
+    updatePost: builder.mutation({
+      query: ({ postId, caption }) => ({
+        url: `/posts/${postId}/`,
+        method: "PUT",
+        body: { caption },
+      }),
+    }),
     likePost: builder.mutation<void, number>({
       query: (postId) => ({
         url: `/like/${postId}/`,
@@ -104,4 +111,5 @@ export const {
   useBookmarkPostMutation,
   useCommentOnPostMutation,
   useGetUserPostQuery,
+  useUpdatePostMutation,
 } = postSlice;
