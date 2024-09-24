@@ -5,5 +5,6 @@ export { default as LoginForm } from "./LoginForm";
 export { default as PasswordResetForm } from "./PasswordResetForm";
 export { default as PasswordResetConfirmForm } from "./PasswordResetConfirmForm";
 export { default as CreatePostForm } from "./CreatePostForm";
+export { default as EditPostForm } from "./EditPostForm";
 export { default as ReuseForm } from "./ReuseForm";
 export { default as ReuseFormFields } from "./ReuseFormFields";
