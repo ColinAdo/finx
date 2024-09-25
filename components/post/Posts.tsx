@@ -19,7 +19,7 @@ export default function Post() {
         <div className="flex flex-col space-y-2.5">
           <div className="flex items-center justify-between px-3 sm:px-0">
             <div className="flex space-x-3 items-center">
-              <Link href={`/dashboard/profile/${post.author.username}`}>
+              <Link href={`/dashboard/${post.author.username}`}>
                 <Avatar className="relative h-6 w-6 cursor-pointer">
                   {post.author.profile_picture ? (
                     <Image
@@ -40,7 +40,11 @@ export default function Post() {
               </Link>
               <div className="text-sm">
                 <p className="space-x-1">
-                  <span className="font-semibold">{post.author.username}</span>
+                  <Link href={`/dashboard/${post.author.username}`}>
+                    <span className="font-semibold">
+                      {post.author.username}
+                    </span>
+                  </Link>
                   <span
                     className="font-medium text-neutral-500 dark:text-neutral-400
                       text-xs

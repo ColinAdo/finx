@@ -12,7 +12,7 @@ export default function ProfileLink() {
   const pathname = usePathname();
   const { data, isLoading } = useRetrieveProfileQuery();
 
-  const href = `/dashboard/profile/${data?.profile.username}/`;
+  const href = `/dashboard/${data?.profile.username}/`;
   const isActive = pathname === href;
 
   return (
