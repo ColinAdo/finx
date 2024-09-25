@@ -78,7 +78,7 @@ export const UpdateComment = CommentSchema;
 export const DeleteComment = CommentSchema.pick({ id: true });
 
 export const UserSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   username: z.string().optional(),
   name: z.string().optional(),
   image: z.string().optional(),
