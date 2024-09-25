@@ -2,6 +2,7 @@ import { apiSlice } from "../services/apiSlice";
 
 interface ProfileData {
   profile: {
+    id: number;
     username: string;
     profile_picture: string;
     profession: string;
@@ -22,7 +23,11 @@ const profileSlice = apiSlice.injectEndpoints({
     retrieveProfile: builder.query<ProfileData, void>({
       query: () => "/profile/me/",
     }),
+    retrieveUsersProfile: builder.query<ProfileData, string>({
+      query: (username) => `/users/p/${username}/`,
+    }),
   }),
 });
 
-export const { useRetrieveProfileQuery } = profileSlice;
+export const { useRetrieveProfileQuery, useRetrieveUsersProfileQuery } =
+  profileSlice;
