@@ -57,9 +57,9 @@ const postSlice = apiSlice.injectEndpoints({
         url: "/posts/",
       }),
     }),
-    getUserPost: builder.query<void, number>({
-      query: (postId) => ({
-        url: `/posts/${postId}/author-posts/`,
+    getUserPost: builder.query<void, string>({
+      query: (username) => ({
+        url: `/posts/author-posts/${username}/`,
       }),
     }),
     retrievePost: builder.query<void, number>({

@@ -19,7 +19,7 @@ interface Props {
 }
 
 export default function MorePosts({ post }: Props) {
-  const { data: posts } = useGetUserPostQuery(post.id);
+  const { data: posts } = useGetUserPostQuery(post.author.username);
 
   if (!posts) {
     return;
