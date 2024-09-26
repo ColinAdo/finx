@@ -40,15 +40,9 @@ interface Props {
   postId: number;
   profilePic: string | undefined;
   className?: string;
-  // inputRef?: React.Ref<HTMLInputElement>;
 }
 
-export default function Comments({
-  postId,
-  profilePic,
-  className,
-}: // inputRef,
-Props) {
+export default function Comments({ postId, profilePic, className }: Props) {
   const [progress, setProgress] = useState(0);
   const [file, setFile] = useState<File | null>(null);
 
