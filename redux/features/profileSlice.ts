@@ -4,7 +4,7 @@ interface ProfileData {
   profile: {
     id: number;
     email: string;
-    username: string | undefined;
+    username: string;
     profile_picture: string;
     profession: string;
     github: string;
