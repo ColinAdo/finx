@@ -3,7 +3,8 @@ import { apiSlice } from "../services/apiSlice";
 interface ProfileData {
   profile: {
     id: number;
-    username: string;
+    email: string;
+    username: string | undefined;
     profile_picture: string;
     profession: string;
     github: string;
@@ -26,8 +27,37 @@ const profileSlice = apiSlice.injectEndpoints({
     retrieveUsersProfile: builder.query<ProfileData, string>({
       query: (username) => `/users/p/${username}/`,
     }),
+    updateProfile: builder.mutation({
+      query: ({
+        userId,
+        email,
+        username,
+        profile_picture,
+        profession,
+        github,
+        instagram,
+        linkedin,
+        x,
+      }) => ({
+        url: `/profile/${userId}/`,
+        method: "PUT",
+        body: {
+          email,
+          username,
+          profile_picture,
+          profession,
+          github,
+          instagram,
+          linkedin,
+          x,
+        },
+      }),
+    }),
   }),
 });
 
-export const { useRetrieveProfileQuery, useRetrieveUsersProfileQuery } =
-  profileSlice;
+export const {
+  useRetrieveProfileQuery,
+  useRetrieveUsersProfileQuery,
+  useUpdateProfileMutation,
+} = profileSlice;
