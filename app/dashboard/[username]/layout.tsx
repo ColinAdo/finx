@@ -1,17 +1,16 @@
 "use client";
-// import { auth } from "@/auth";
-// import FollowButton from "@/components/FollowButton";
-// import ProfileAvatar from "@/components/ProfileAvatar";
-// import ProfileHeader from "@/components/ProfileHeader";
+
 // import ProfileTabs from "@/components/ProfileTabs";
-// import UserAvatar from "@/components/UserAvatar";
 import { Button, buttonVariants } from "@/components/ui/button";
-// import { fetchProfile } from "@/lib/data";
 import { MoreHorizontal, Settings } from "lucide-react";
 import Link from "next/link";
 import { useRetrieveUsersProfileQuery } from "@/redux/features/profileSlice";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
-import { ProfileAvatar, ProfileHeader } from "@/components/profile";
+import {
+  FollowButton,
+  ProfileAvatar,
+  ProfileHeader,
+} from "@/components/profile";
 import { UserAvatar } from "@/components/common";
 
 type Props = {
@@ -28,10 +27,8 @@ export default function ProfileLayout({
   const { data: profile } = useRetrieveUsersProfileQuery(username);
   const { data: user } = useRetrieveUserQuery();
   const isCurrentUser = profile?.profile.id === user?.id;
-  //   the followerId here is the id of the user who is following the profile
-  //   const isFollowing = profile?.followedBy.some(
-  //     (user) => user.followerId === session?.user.id
-  //   );
+
+  const isFollowing = profile?.following.some((user) => user.id === user.id);
 
   if (!profile) {
     return;
@@ -89,10 +86,11 @@ export default function ProfileLayout({
                   >
                     <MoreHorizontal />
                   </Button>
-                  {/* <FollowButton
+                  <FollowButton
                     isFollowing={isFollowing}
-                    profileId={profile.id}
-                  /> */}
+                    profileId={profile.profile.id}
+                    username={profile.profile.username}
+                  />
                   <Button
                     variant={"secondary"}
                     className="font-bold"
@@ -113,14 +111,17 @@ export default function ProfileLayout({
                 href={`/dashboard/${profile.profile.username}/followers`}
                 className="font-medium"
               >
-                <strong>{profile.followers_count}</strong> followers
+                <strong>{profile.following_count}</strong>{" "}
+                {profile.following_count < 1 || profile.following_count > 1
+                  ? "followers"
+                  : "follower"}
               </Link>
 
               <Link
                 href={`/dashboard/${profile.profile.username}/following`}
                 className="font-medium"
               >
-                <strong>{profile.following_count}</strong> following
+                <strong>{profile.followers_count}</strong> following
               </Link>
             </div>
 

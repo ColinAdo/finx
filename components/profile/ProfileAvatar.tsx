@@ -53,8 +53,6 @@ export default function ProfileAvatar({ children, user }: ProfilerProps) {
 
   if (!mount) return null;
 
-  console.log("Is Current user =====:", isCurrentUser);
-
   if (!isCurrentUser)
     return <UserAvatar user={user} className="w-20 h-20 md:w-36 md:h-36" />;
 
