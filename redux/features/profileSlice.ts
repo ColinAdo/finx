@@ -53,6 +53,12 @@ const profileSlice = apiSlice.injectEndpoints({
         },
       }),
     }),
+    followProfile: builder.mutation({
+      query: (profileId) => ({
+        url: `/connect/${profileId}/`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -60,4 +66,5 @@ export const {
   useRetrieveProfileQuery,
   useRetrieveUsersProfileQuery,
   useUpdateProfileMutation,
+  useFollowProfileMutation,
 } = profileSlice;
