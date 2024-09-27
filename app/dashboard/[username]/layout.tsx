@@ -42,7 +42,10 @@ export default function ProfileLayout({
       <div className="max-w-4xl mx-auto">
         <div className="flex gap-x-5 md:gap-x-10 px-4">
           <ProfileAvatar user={profile?.profile}>
-            <UserAvatar className="w-20 h-20 md:w-36 md:h-36 cursor-pointer" />
+            <UserAvatar
+              user={profile.profile}
+              className="w-20 h-20 md:w-36 md:h-36 cursor-pointer"
+            />
           </ProfileAvatar>
 
           <div className="md:px-10 space-y-4">

@@ -21,6 +21,12 @@ interface User {
   id: number;
   username: string;
   profile_picture: string;
+  email: string;
+  profession: string;
+  github: string;
+  instagram: string;
+  linkedin: string;
+  x: string;
 }
 
 interface PostComment {
@@ -103,7 +109,7 @@ export default function PostView({ postId, post }: Props) {
 
               <HoverCardContent>
                 <div className="flex items-center space-x-2">
-                  <UserAvatar className="h-14 w-14" />
+                  <UserAvatar user={post.author} className="h-14 w-14" />
                   <div>
                     <p className="font-bold">{post.author.username}</p>
                     <p className="text-sm font-medium dark:text-neutral-400">
@@ -165,7 +171,7 @@ export default function PostView({ postId, post }: Props) {
               .map((comment) => (
                 <div className="group p-3 px-3.5  flex items-start space-x-2.5">
                   <Link href={`/dashboard/${comment.owner.username}`}>
-                    <UserAvatar />
+                    <UserAvatar user={comment.owner} />
                   </Link>
                   <div className="space-y-1.5">
                     <div className="flex my-1 items-center space-x-1.5 leading-none text-sm">

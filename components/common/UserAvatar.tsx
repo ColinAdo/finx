@@ -1,21 +1,36 @@
 import { Avatar } from "@/components/ui/avatar";
 import { Spinner } from "@/components/common";
 import Image from "next/image";
-import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
 import { AvatarProps } from "@radix-ui/react-avatar";
 
-type Props = Partial<AvatarProps>;
+interface User {
+  id: number;
+  email: string;
+  username: string;
+  profile_picture: string;
+  profession: string;
+  github: string;
+  instagram: string;
+  linkedin: string;
+  x: string;
+}
 
-export default function UserAvatar({ ...avatarProps }: Props) {
-  const { data: profile } = useRetrieveProfileQuery();
+type Props = Partial<AvatarProps> & {
+  user: User | undefined;
+};
+
+export default function UserAvatar({ user, ...avatarProps }: Props) {
+  if (!user) {
+    return;
+  }
 
   return (
     <Avatar className="relative h-6 w-6 cursor-pointer" {...avatarProps}>
-      {profile?.profile.profile_picture ? (
+      {user.profile_picture ? (
         <Image
-          src={profile?.profile.profile_picture}
+          src={user.profile_picture}
           fill
-          alt={`${profile?.profile.username}'s avatar`}
+          alt={`${user.username}'s avatar`}
           className="rounded-full object-cover"
         />
       ) : (

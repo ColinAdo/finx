@@ -15,6 +15,10 @@ export default function ProfileLink() {
   const href = `/dashboard/${data?.profile.username}/`;
   const isActive = pathname === href;
 
+  if (!data) {
+    return;
+  }
+
   return (
     <Link
       href={href}
@@ -28,6 +32,7 @@ export default function ProfileLink() {
         <Spinner sm />
       ) : (
         <UserAvatar
+          user={data?.profile}
           className={`h-6 w-6 ${isActive && "border-2 border-white"}`}
         />
       )}

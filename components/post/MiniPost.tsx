@@ -9,6 +9,12 @@ interface User {
   id: number;
   username: string;
   profile_picture: string;
+  email: string;
+  profession: string;
+  github: string;
+  instagram: string;
+  linkedin: string;
+  x: string;
 }
 
 interface Comment {
@@ -57,16 +63,16 @@ function MiniPost({ post }: Props) {
   const href = `/dashboard/${username}`;
 
   return (
-    <div className="group p-3 px-3.5 flex items-start space-x-2.5">
+    <div className="group flex items-start space-x-2.5">
       <Link href={href}>
-        <UserAvatar />
+        <UserAvatar user={post.author} />
       </Link>
       <div className="flex-1">
         <div className="flex items-center justify-between space-x-1.5 leading-none text-sm">
-          <Link href={href} className="font-semibold">
+          <Link href={href} className="font-semibold mx-0">
             {username}
           </Link>
-          <p className="font-medium">{post.caption}</p>
+          <small>{post.comments_count > 1 && "Comments"}</small>
           <div className="flex items-center space-x-2.5">
             <Timestamp createdAt={post.created_at} />
             <PostOptions

@@ -16,6 +16,12 @@ interface User {
   id: number;
   username: string;
   profile_picture: string;
+  email: string;
+  profession: string;
+  github: string;
+  instagram: string;
+  linkedin: string;
+  x: string;
 }
 
 interface PostComment {
@@ -121,7 +127,7 @@ export default function CommentView({ postId, post }: Props) {
 
           <CommentForm
             postId={post.id}
-            profilePic={post.author.profile_picture}
+            profilePic={data?.profile.profile_picture}
             className="mt-auto"
           />
         </div>
