@@ -1,6 +1,5 @@
 "use client";
 
-// import ProfileTabs from "@/components/ProfileTabs";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { MoreHorizontal, Settings } from "lucide-react";
 import Link from "next/link";
@@ -12,6 +11,7 @@ import {
   ProfileHeader,
 } from "@/components/profile";
 import { UserAvatar } from "@/components/common";
+import { ProfileTabs } from "@/components/profile";
 
 type Props = {
   params: {
@@ -136,7 +136,7 @@ export default function ProfileLayout({
           </div>
         </div>
 
-        {/* <ProfileTabs profile={profile} isCurrentUser={isCurrentUser} /> */}
+        <ProfileTabs profile={profile} isCurrentUser={isCurrentUser} />
 
         {children}
       </div>

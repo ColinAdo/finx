@@ -92,6 +92,12 @@ const postSlice = apiSlice.injectEndpoints({
         method: "POST",
       }),
     }),
+    getBookmarkedPosts: builder.query<Post[], string>({
+      query: (username) => ({
+        url: `/bookmarked/${username}/posts/`,
+        method: "GET",
+      }),
+    }),
     commentOnPost: builder.mutation({
       query: ({ post, comment, comment_image }) => ({
         url: "/comment/",
@@ -115,6 +121,7 @@ export const {
   useDeletePostMutation,
   useLikePostMutation,
   useBookmarkPostMutation,
+  useGetBookmarkedPostsQuery,
   useCommentOnPostMutation,
   useGetUserPostQuery,
   useUpdatePostMutation,
