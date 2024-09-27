@@ -24,6 +24,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { Avatar } from "../ui/avatar";
 import Image from "next/image";
+import { useMount } from "@/hooks";
 
 interface User {
   id: number;
@@ -52,6 +53,7 @@ export default function Comments({ postId, profilePic, className }: Props) {
   }>();
   const [commentOnPost] = useCommentOnPostMutation();
   const { refetch } = useRetrievePostQuery(postId);
+  const mount = useMount();
   const { edgestore } = useEdgeStore();
 
   const form = useForm<z.infer<typeof CommentSchema>>({
@@ -61,6 +63,7 @@ export default function Comments({ postId, profilePic, className }: Props) {
       comment_image: fileUrl?.url,
     },
   });
+  if (!mount) return null;
 
   const commenting = form.watch("comment") ?? "";
 
