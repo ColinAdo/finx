@@ -19,7 +19,6 @@ import { Spinner, UserAvatar } from "@/components/common";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { CameraIcon } from "lucide-react";
 import { useEdgeStore } from "@/lib/edgestore";
-import { useRouter } from "next/navigation";
 
 interface User {
   id: number;
@@ -41,7 +40,6 @@ interface ProfilerProps {
 export default function ProfileAvatar({ children, user }: ProfilerProps) {
   const [updateProfile] = useUpdateProfileMutation();
   const { refetch } = useRetrieveProfileQuery();
-  const router = useRouter();
   const { data } = useRetrieveUserQuery();
   const isCurrentUser = data?.id === user.id;
 
