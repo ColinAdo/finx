@@ -25,10 +25,12 @@ export default function ProfileLayout({
   params: { username },
 }: Props) {
   const { data: profile } = useRetrieveUsersProfileQuery(username);
-  const { data: user } = useRetrieveUserQuery();
-  const isCurrentUser = profile?.profile.id === user?.id;
+  const { data } = useRetrieveUserQuery();
+  const isCurrentUser = profile?.profile.id === data?.id;
 
-  const isFollowing = profile?.following.some((user) => user.id === user.id);
+  const isFollowing = profile?.following.some(
+    (user) => user.user.id === data?.id
+  );
 
   if (!profile) {
     return;
