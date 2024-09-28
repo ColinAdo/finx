@@ -1,6 +1,5 @@
 "use client";
 
-// import { FollowerWithExtras } from "@/lib/definitions";
 import Link from "next/link";
 import FollowButton from "./FollowButton";
 import { UserAvatar } from "@/components/common";
@@ -41,13 +40,7 @@ export default function Follower({
     (follower) => follower.user.id === user.id
   );
 
-  profile?.following.forEach((following) =>
-    console.log("Followers names", following.user.username, following.user)
-  );
-
   const isCurrentUser = profile?.profile.id === user.id;
-
-  console.log("isFollowings:", isFollowing, isCurrentUser);
 
   if (!profile) return null;
 
