@@ -5,6 +5,7 @@ interface ProfileData {
     id: number;
     email: string;
     username: string;
+    header: string;
     profile_picture: string;
     profession: string;
     github: string;

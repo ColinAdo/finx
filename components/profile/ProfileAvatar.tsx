@@ -20,20 +20,28 @@ import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 import { CameraIcon } from "lucide-react";
 import { useEdgeStore } from "@/lib/edgestore";
 
-interface User {
-  id: number;
-  email: string;
-  username: string;
-  profile_picture: string;
-  profession: string;
-  github: string;
-  instagram: string;
-  linkedin: string;
-  x: string;
+interface ProfileData {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    header: string;
+    profile_picture: string;
+    profession: string;
+    github: string;
+    instagram: string;
+    linkedin: string;
+    x: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 interface ProfilerProps {
-  user: User;
+  user: ProfileData;
   children: React.ReactNode;
 }
 
@@ -41,12 +49,12 @@ export default function ProfileAvatar({ children, user }: ProfilerProps) {
   const [updateProfile] = useUpdateProfileMutation();
   const { refetch } = useRetrieveProfileQuery();
   const { data } = useRetrieveUserQuery();
-  const isCurrentUser = data?.id === user.id;
+  const isCurrentUser = data?.id === user.profile.id;
 
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [file, setFile] = useState<File | null>(null);
-  const [fileUrl, setFileUrl] = useState(user.profile_picture || " ");
+  const [fileUrl, setFileUrl] = useState(user.profile.profile_picture || " ");
   const [isUploading, setIsUploading] = useState(false);
   const { edgestore } = useEdgeStore();
   const mount = useMount();
@@ -89,15 +97,15 @@ export default function ProfileAvatar({ children, user }: ProfilerProps) {
 
     try {
       await updateProfile({
-        userId: user.id,
-        email: user.email,
-        username: user.username,
+        userId: user.profile.id,
+        email: user.profile.email,
+        username: user.profile.username,
         profile_picture: fileUrl,
-        profession: user.profession,
-        github: user.github,
-        instagram: user.instagram,
-        linkedin: user.linkedin,
-        x: user.x,
+        profession: user.profile.profession,
+        github: user.profile.github,
+        instagram: user.profile.instagram,
+        linkedin: user.profile.linkedin,
+        x: user.profile.x,
       }).unwrap();
 
       toast.success("Profile updated successfully");

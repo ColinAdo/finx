@@ -3,34 +3,42 @@ import { Spinner } from "@/components/common";
 import Image from "next/image";
 import { AvatarProps } from "@radix-ui/react-avatar";
 
-interface User {
-  id: number;
-  email: string;
-  username: string;
-  profile_picture: string;
-  profession: string;
-  github: string;
-  instagram: string;
-  linkedin: string;
-  x: string;
+interface ProfileData {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    header: string;
+    profile_picture: string;
+    profession: string;
+    github: string;
+    instagram: string;
+    linkedin: string;
+    x: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 type Props = Partial<AvatarProps> & {
-  user: User | undefined;
+  user: ProfileData | undefined;
 };
 
 export default function UserAvatar({ user, ...avatarProps }: Props) {
-  if (!user) {
+  if (!user?.profile) {
     return;
   }
 
   return (
     <Avatar className="relative h-6 w-6 cursor-pointer" {...avatarProps}>
-      {user.profile_picture ? (
+      {user.profile.profile_picture ? (
         <Image
-          src={user.profile_picture}
+          src={user.profile.profile_picture}
           fill
-          alt={`${user.username}'s avatar`}
+          alt={`${user.profile.username}'s avatar`}
           className="rounded-full object-cover"
         />
       ) : (
