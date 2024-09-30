@@ -5,13 +5,10 @@ interface ProfileData {
     id: number;
     email: string;
     username: string;
-    header: string;
+    bio: string;
     profile_picture: string;
-    profession: string;
-    github: string;
-    instagram: string;
-    linkedin: string;
-    x: string;
+    website: string;
+    gender: string;
   };
   following: any[];
   followers: any[];
@@ -34,11 +31,9 @@ const profileSlice = apiSlice.injectEndpoints({
         email,
         username,
         profile_picture,
-        profession,
-        github,
-        instagram,
-        linkedin,
-        x,
+        bio,
+        gender,
+        website,
       }) => ({
         url: `/profile/${userId}/`,
         method: "PUT",
@@ -46,11 +41,9 @@ const profileSlice = apiSlice.injectEndpoints({
           email,
           username,
           profile_picture,
-          profession,
-          github,
-          instagram,
-          linkedin,
-          x,
+          bio,
+          gender,
+          website,
         },
       }),
     }),

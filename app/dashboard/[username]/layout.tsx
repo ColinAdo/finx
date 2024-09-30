@@ -40,9 +40,9 @@ export default function ProfileLayout({
       <ProfileHeader username={profile.profile.username} />
       <div className="max-w-4xl mx-auto">
         <div className="flex gap-x-5 md:gap-x-10 px-4">
-          <ProfileAvatar user={profile?.profile}>
+          <ProfileAvatar profile={profile}>
             <UserAvatar
-              user={profile.profile}
+              user={profile}
               className="w-20 h-20 md:w-36 md:h-36 cursor-pointer"
             />
           </ProfileAvatar>
@@ -129,11 +129,7 @@ export default function ProfileLayout({
 
             <div className="text-sm">
               <div className="font-bold my-2">{profile.profile.username}</div>
-              {profile.profile.profession && (
-                <p>{profile.profile.profession}</p>
-              )}
-              {profile.profile.github && <p>{profile.profile.github}</p>}
-              {profile.profile.linkedin && <p>{profile.profile.linkedin}</p>}
+              {profile.profile.bio && <p>{profile.profile.bio}</p>}
             </div>
           </div>
         </div>

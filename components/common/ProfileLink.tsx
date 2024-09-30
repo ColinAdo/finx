@@ -32,7 +32,7 @@ export default function ProfileLink() {
         <Spinner sm />
       ) : (
         <UserAvatar
-          user={data?.profile}
+          user={data}
           className={`h-6 w-6 ${isActive && "border-2 border-white"}`}
         />
       )}

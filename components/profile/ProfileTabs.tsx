@@ -14,11 +14,9 @@ interface ProfileData {
     email: string;
     username: string;
     profile_picture: string;
-    profession: string;
-    github: string;
-    instagram: string;
-    linkedin: string;
-    x: string;
+    bio: string;
+    gender: string;
+    website: string;
   };
   following: any[];
   followers: any[];

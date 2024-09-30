@@ -76,3 +76,12 @@ export const CommentSchema = z.object({
 export const CreateComment = CommentSchema.omit({ id: true });
 export const UpdateComment = CommentSchema;
 export const DeleteComment = CommentSchema.pick({ id: true });
+
+export const UserSchema = z.object({
+  profile_picture: z.string().optional(),
+  email: z.string().optional(),
+  username: z.string().optional(),
+  bio: z.string().optional(),
+  website: z.string().optional(),
+  gender: z.string().optional(),
+});

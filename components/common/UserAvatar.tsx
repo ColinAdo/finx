@@ -8,13 +8,10 @@ interface ProfileData {
     id: number;
     email: string;
     username: string;
-    header: string;
+    bio: string;
     profile_picture: string;
-    profession: string;
-    github: string;
-    instagram: string;
-    linkedin: string;
-    x: string;
+    website: string;
+    gender: string;
   };
   following: any[];
   followers: any[];
@@ -24,7 +21,7 @@ interface ProfileData {
 }
 
 type Props = Partial<AvatarProps> & {
-  user: ProfileData | undefined;
+  user: ProfileData;
 };
 
 export default function UserAvatar({ user, ...avatarProps }: Props) {

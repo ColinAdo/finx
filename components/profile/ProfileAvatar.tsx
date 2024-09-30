@@ -25,13 +25,10 @@ interface ProfileData {
     id: number;
     email: string;
     username: string;
-    header: string;
+    bio: string;
     profile_picture: string;
-    profession: string;
-    github: string;
-    instagram: string;
-    linkedin: string;
-    x: string;
+    website: string;
+    gender: string;
   };
   following: any[];
   followers: any[];
@@ -41,28 +38,30 @@ interface ProfileData {
 }
 
 interface ProfilerProps {
-  user: ProfileData;
+  profile: ProfileData;
   children: React.ReactNode;
 }
 
-export default function ProfileAvatar({ children, user }: ProfilerProps) {
+export default function ProfileAvatar({ children, profile }: ProfilerProps) {
   const [updateProfile] = useUpdateProfileMutation();
   const { refetch } = useRetrieveProfileQuery();
   const { data } = useRetrieveUserQuery();
-  const isCurrentUser = data?.id === user.profile.id;
+  const isCurrentUser = data?.id === profile?.profile.id;
 
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
   const [file, setFile] = useState<File | null>(null);
-  const [fileUrl, setFileUrl] = useState(user.profile.profile_picture || " ");
+  const [fileUrl, setFileUrl] = useState(
+    profile?.profile.profile_picture || " "
+  );
   const [isUploading, setIsUploading] = useState(false);
   const { edgestore } = useEdgeStore();
   const mount = useMount();
 
-  if (!mount) return null;
+  if (!mount || !profile) return null;
 
   if (!isCurrentUser)
-    return <UserAvatar user={user} className="w-20 h-20 md:w-36 md:h-36" />;
+    return <UserAvatar user={profile} className="w-20 h-20 md:w-36 md:h-36" />;
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files?.[0];
@@ -97,15 +96,13 @@ export default function ProfileAvatar({ children, user }: ProfilerProps) {
 
     try {
       await updateProfile({
-        userId: user.profile.id,
-        email: user.profile.email,
-        username: user.profile.username,
+        userId: profile.profile.id,
+        email: profile.profile.email,
+        username: profile.profile.username,
         profile_picture: fileUrl,
-        profession: user.profile.profession,
-        github: user.profile.github,
-        instagram: user.profile.instagram,
-        linkedin: user.profile.linkedin,
-        x: user.profile.x,
+        bio: profile.profile.bio,
+        website: profile.profile.website,
+        gender: profile.profile.gender,
       }).unwrap();
 
       toast.success("Profile updated successfully");
