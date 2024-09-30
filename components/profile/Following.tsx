@@ -25,7 +25,7 @@ interface Props {
   profileData: ProfileData;
 }
 
-export default function Follower({
+export default function Following({
   username,
   usernameParam,
   profileId,
