@@ -11,17 +11,9 @@ import {
   useGetPostQuery,
 } from "@/redux/features/postSlice";
 
-interface User {
-  id: number;
-}
-
-interface Bookmark {
-  user: User;
-}
-
 interface Post {
   id: number;
-  bookmarks: Bookmark[];
+  bookmarks: any[];
   bookmark_count: number;
 }
 
@@ -34,11 +26,8 @@ export default function BookmarkButton({ post }: { post: Post }) {
     (bookmark) => bookmark.user.id === data?.id
   );
 
-  const [bookmarked, setBookmarked] = useState(
-    localStorage.getItem(`${post.id}-bookmarked`) === "true"
-      ? true
-      : initialBookmark
-  );
+  // console.log("initialBookmark", initialBookmark);
+  // console.log("Array:", post.bookmarks);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -46,16 +35,10 @@ export default function BookmarkButton({ post }: { post: Post }) {
     try {
       await bookmarkPost(post.id).unwrap();
       refetch();
-      setBookmarked((prevLiked) => !prevLiked);
-      localStorage.setItem(`${post.id}-bookmarked`, String(bookmarked));
     } catch (error) {
       toast.error("Error bookmarking post");
     }
   };
-
-  useEffect(() => {
-    localStorage.setItem(`${post.id}-bookmarked`, String(bookmarked));
-  }, [bookmarked, post.id]);
 
   return (
     <form onSubmit={handleSubmit} className="ml-auto">
@@ -63,8 +46,8 @@ export default function BookmarkButton({ post }: { post: Post }) {
       <ActionIcons>
         <Bookmark
           className={cn("h-6 w-6", {
-            "dark:fill-white fill-black": bookmarked,
-            "dark:text-gray-100 text-gray-950": !bookmarked,
+            "dark:fill-white fill-black": initialBookmark,
+            "dark:text-gray-100 text-gray-950": !initialBookmark,
           })}
         />
       </ActionIcons>

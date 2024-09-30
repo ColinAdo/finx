@@ -16,16 +16,12 @@ interface Like {
   user: User;
 }
 
-interface Bookmark {
-  user: User;
-}
-
 interface Post {
   id: number;
   fileUrl: string;
   likes: Like[];
   likes_count: number;
-  bookmarks: Bookmark[];
+  bookmarks: any[];
   bookmark_count: number;
   comments_count: number;
 }
