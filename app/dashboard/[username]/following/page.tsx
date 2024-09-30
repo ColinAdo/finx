@@ -12,7 +12,7 @@ interface Props {
 export default function FollowersPage({ params: { username } }: Props) {
   const { data } = useRetrieveUsersProfileQuery(username);
 
-  const following = data?.following;
+  const following = data?.followers;
   if (!data) {
     return;
   }
