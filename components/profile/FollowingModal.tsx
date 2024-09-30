@@ -24,6 +24,8 @@ export default function FollowingModal({ following, username }: Props) {
 
   if (!mount) return null;
 
+  console.log("Length of array:", following?.length);
+
   return (
     <Dialog
       open={isFollowingPage}
@@ -48,7 +50,7 @@ export default function FollowingModal({ following, username }: Props) {
                 profileData={following.follows}
                 username={username}
                 usernameParam={following.follows.username}
-                profileId={following.user.id}
+                profileId={following.follows.id}
               />
             ) : null
           )}
