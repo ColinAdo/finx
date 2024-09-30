@@ -36,13 +36,11 @@ export default function Following({
   if (!user) return null;
   const { data: profile } = useRetrieveUsersProfileQuery(username);
 
-  const isFollowing = profile?.following.some(
-    (following) => following.follows.id === user.id
+  const isFollowing = profile?.followers.some(
+    (following) => following.user.id === user.id
   );
 
   const isCurrentUser = profile?.profile.id === user.id;
-
-  console.log("isCurrentUser, isFollowing", isCurrentUser, isFollowing);
 
   if (!profile) return null;
 
