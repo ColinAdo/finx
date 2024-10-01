@@ -7,3 +7,4 @@ export { default as FollowingModal } from "./FollowingModal";
 export { default as Follower } from "./Follower";
 export { default as Following } from "./Following";
 export { default as ProfileForm } from "./ProfileForm";
+export { default as Messages } from "./Messages";
