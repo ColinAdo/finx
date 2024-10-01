@@ -5,14 +5,27 @@ import { buttonVariants } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
+import Link from "next/link";
 
 const tabs = [
-  { title: "Edit profile", value: "edit-profile" },
-  { title: "Professional account", value: "professional-account" },
-  { title: "Notifications", value: "notifications" },
-  { title: "Privacy and security", value: "privacy-and-security" },
-  { title: "Login activity", value: "login-activity" },
-  { title: "Emails from Instagram", value: "emails-from-instagram" },
+  { title: "Colin", value: "edit-profile", href: `messages` },
+  {
+    title: "Professional account",
+    value: "professional-account",
+    href: "/",
+  },
+  { title: "Notifications", value: "notifications", href: "/" },
+  {
+    title: "Privacy and security",
+    value: "privacy-and-security",
+    href: "/",
+  },
+  { title: "Login activity", value: "login-activity", href: "/" },
+  {
+    title: "Emails from Instagram",
+    value: "emails-from-instagram",
+    href: "/",
+  },
 ];
 
 export default function SettingsLayout({
@@ -29,14 +42,14 @@ export default function SettingsLayout({
     <div className="flex">
       <Tabs
         defaultValue="edit-profile"
-        className="w-[250px] min-h-screen hidden lg:block fixed space-y-8 left-0 top-0 md:ml-20 lg:ml-64 h-full flex-col lg:border-r px-6 py-10"
+        className="w-full lg:w-[250px] min-h-screen -mt-4 lg:-mt-2 md:mt-10 h-full flex-col lg:border-r py-10"
         orientation="vertical"
       >
-        <div className="flex justify-between mx-4 -mt-6">
-          <UserAvatar user={profile} className="h-10 w-10 hidden lg:block" />
-          <h4 className="font-extrabold text-xl text-white ml-1">Chats</h4>
+        <div className="flex fixed justify-between mx-4 lg:-ml-8 ml-12 lg:-mt-14 -mt-20">
+          <UserAvatar user={profile} className="h-10 w-10" />
+          <h4 className="font-extrabold text-xl text-white ml-5">Chats</h4>
         </div>
-        <TabsList className="flex flex-col items-start justify-start h-full bg-transparent">
+        <TabsList className="flex flex-col items-start lg:-ml-12  ml-8 justify-start h-full bg-transparent">
           {tabs.map((tab) => (
             <TabsTrigger
               key={tab.value}
@@ -46,7 +59,7 @@ export default function SettingsLayout({
                 "data-[state=active]:bg-zinc-100 dark:data-[state=active]:bg-neutral-800 dark:hover:bg-neutral-900 w-full justify-start !px-3"
               )}
             >
-              {tab.title}
+              <Link href={`${tab.href}`}>{tab.title}</Link>
             </TabsTrigger>
           ))}
         </TabsList>
