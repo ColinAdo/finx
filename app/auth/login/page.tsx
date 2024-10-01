@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { LoginForm } from "@/components/forms";
 import { SocialButtons } from "@/components/common";
+import { calSans } from "@/app/fonts";
 
 export const metadata: Metadata = {
   title: "Finx | Login",
@@ -17,7 +18,9 @@ export default function Page() {
           src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
           className="mx-auto h-10 w-auto"
         />
-        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight dark:text-gray-100 text-gray-900">
+        <h2
+          className={` ${calSans.className} mt-10 text-center text-2xl font-bold leading-9 tracking-tight dark:text-gray-100 text-gray-900`}
+        >
           Sign in to your account
         </h2>
       </div>

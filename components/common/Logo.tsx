@@ -1,7 +1,7 @@
-import { SwitchCamera, View } from "lucide-react";
+import { View } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "@/components/ui/button";
-// import { calSans } from "@/app/fonts";
+import { calSans } from "@/app/fonts";
 
 export default function Logo() {
   return (
@@ -15,7 +15,11 @@ export default function Logo() {
       })}
     >
       <View className="h-6 w-6 shrink-0 lg:hidden" />
-      <p className={`font-semibold text-xl hidden lg:block `}>Finx</p>
+      <p
+        className={`font-semibold text-xl hidden lg:block ${calSans.className}`}
+      >
+        Finx
+      </p>
     </Link>
   );
 }
