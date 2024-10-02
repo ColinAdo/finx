@@ -8,7 +8,7 @@ export default function Page() {
   const [googleAuthenticate] = useSocialAuthenticateMutation();
   useSocialAuth(googleAuthenticate, "google-oauth2");
   return (
-    <div className="flex justify-center items-center my-8">
+    <div className="flex justify-center items-center my-80">
       <Spinner lg />
     </div>
   );
