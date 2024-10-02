@@ -29,8 +29,8 @@ const links = [
     icon: Clapperboard,
   },
   {
-    name: "Messages",
-    href: "/dashboard/messages",
+    name: "Chats",
+    href: "/dashboard/chats",
     icon: MessageCircle,
   },
   {
