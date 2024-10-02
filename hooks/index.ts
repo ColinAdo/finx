@@ -5,3 +5,4 @@ export { default as usePassowrdReset } from "./use-password-reset";
 export { default as usePassowrdResetConfirm } from "./use-password-reset-confirm";
 export { default as useSocialAuth } from "./use-social-auth";
 export { default as useMount } from "./use-mount";
+export { default as useWebSocket } from "./use-webSocket";
