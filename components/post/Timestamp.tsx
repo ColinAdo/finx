@@ -8,7 +8,7 @@ type Props = {
   className?: string;
 };
 
-function Timestamp({ createdAt, className }: Props) {
+export default function Timestamp({ createdAt, className }: Props) {
   return (
     <ReactTimeago
       className={cn(
@@ -39,5 +39,3 @@ function Timestamp({ createdAt, className }: Props) {
     />
   );
 }
-
-export default Timestamp;
