@@ -5,21 +5,26 @@ import { PostOptions } from "@/components/post";
 import { UserAvatar } from "@/components/common";
 import Timestamp from "./Timestamp";
 
-interface User {
-  id: number;
-  username: string;
-  profile_picture: string;
-  email: string;
-  profession: string;
-  github: string;
-  instagram: string;
-  linkedin: string;
-  x: string;
+interface ProfileData {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 interface Comment {
   id: number;
-  owner: User;
+  owner: ProfileData;
   post: number;
   comment: string | null;
   comment_image?: string | null;
@@ -28,21 +33,21 @@ interface Comment {
 
 interface Like {
   id: number;
-  user: User;
+  user: ProfileData;
   post: number;
   created_at: Date | null;
 }
 
 interface Bookmark {
   id: number;
-  user: User;
+  user: ProfileData;
   post: number;
   created_at: Date | null;
 }
 
 interface Post {
   id: number;
-  author: User;
+  author: ProfileData;
   fileUrl: string;
   caption: string | null;
   created_at: Date;
@@ -59,7 +64,7 @@ interface Props {
 }
 
 function MiniPost({ post }: Props) {
-  const username = post.author.username;
+  const username = post.author.profile.username;
   const href = `/dashboard/${username}`;
 
   return (
@@ -77,7 +82,7 @@ function MiniPost({ post }: Props) {
             <Timestamp createdAt={post.created_at} />
             <PostOptions
               post={post}
-              userId={post.author.id}
+              userId={post.author.profile.id}
               className="hidden group-hover:inline"
             />
           </div>

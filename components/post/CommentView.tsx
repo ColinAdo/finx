@@ -3,8 +3,6 @@
 import { Dialog, DialogContent, DialogHeader } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useMount } from "@/hooks";
-import Image from "next/image";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useRef } from "react";
 import { useRetrieveProfileQuery } from "@/redux/features/profileSlice";
@@ -12,21 +10,26 @@ import { MiniPost, Comment, CommentForm } from "@/components/post";
 import { ViewPost } from "@/components/post";
 import { useRetrievePostQuery } from "@/redux/features/postSlice";
 
-interface User {
-  id: number;
-  username: string;
-  profile_picture: string;
-  email: string;
-  profession: string;
-  github: string;
-  instagram: string;
-  linkedin: string;
-  x: string;
+interface ProfileData {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 interface PostComment {
   id: number;
-  owner: User;
+  owner: ProfileData;
   post: number;
   comment: string | null;
   comment_image?: string | null;
@@ -35,21 +38,21 @@ interface PostComment {
 
 interface Like {
   id: number;
-  user: User;
+  user: ProfileData;
   post: number;
   created_at: Date | null;
 }
 
 interface Bookmark {
   id: number;
-  user: User;
+  user: ProfileData;
   post: number;
   created_at: Date | null;
 }
 
 interface Post {
   id: number;
-  author: User;
+  author: ProfileData;
   fileUrl: string;
   caption: string | null;
   created_at: Date;
@@ -75,7 +78,7 @@ export default function CommentView({ postId, post }: Props) {
   const isPostModal = pathname === `/dashboard/c/${postId}`;
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
-  const username = post?.author.username;
+  const username = post?.author.profile.username;
   const href = `/dashboard/${username}`;
   const mount = useMount();
 
