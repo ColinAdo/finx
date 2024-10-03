@@ -1,7 +1,6 @@
 "use client";
 
-// import { createComment } from "@/lib/actions";
-import { CommentSchema, CreateComment } from "@/lib/schemas";
+import { CommentSchema } from "@/lib/schemas";
 import { cn } from "@/lib/utils";
 import {
   Form,
