@@ -26,9 +26,6 @@ export default function BookmarkButton({ post }: { post: Post }) {
     (bookmark) => bookmark.user.id === data?.id
   );
 
-  // console.log("initialBookmark", initialBookmark);
-  // console.log("Array:", post.bookmarks);
-
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
