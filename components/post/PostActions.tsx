@@ -31,7 +31,7 @@ interface Props {
   className?: string;
 }
 
-function PostActions({ post, className }: Props) {
+export default function PostActions({ post, className }: Props) {
   return (
     <div className={cn("relative flex items-start w-full gap-x-2", className)}>
       <LikeButton post={post} />
@@ -58,5 +58,3 @@ function PostActions({ post, className }: Props) {
     </div>
   );
 }
-
-export default PostActions;
