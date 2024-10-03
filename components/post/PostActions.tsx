@@ -9,21 +9,57 @@ import {
 } from "@/components/post";
 
 interface User {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
+}
+
+interface Comment {
   id: number;
+  owner: User;
+  post: number;
+  comment: string | null;
+  comment_image?: string | null;
+  created_at: Date;
 }
 
 interface Like {
+  id: number;
   user: User;
+  post: number;
+  created_at: Date | null;
+}
+
+interface Bookmark {
+  id: number;
+  user: User;
+  post: number;
+  created_at: Date | null;
 }
 
 interface Post {
   id: number;
+  author: User;
   fileUrl: string;
+  caption: string | null;
+  created_at: Date;
+  comments: Comment[];
+  comments_count: number;
   likes: Like[];
   likes_count: number;
-  bookmarks: any[];
+  bookmarks: Bookmark[];
   bookmark_count: number;
-  comments_count: number;
 }
 
 interface Props {

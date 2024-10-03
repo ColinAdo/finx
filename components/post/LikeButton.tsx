@@ -12,17 +12,57 @@ import {
 } from "@/redux/features/postSlice";
 
 interface User {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
+}
+
+interface Comment {
   id: number;
+  owner: User;
+  post: number;
+  comment: string | null;
+  comment_image?: string | null;
+  created_at: Date;
 }
 
 interface Like {
+  id: number;
   user: User;
+  post: number;
+  created_at: Date | null;
+}
+
+interface Bookmark {
+  id: number;
+  user: User;
+  post: number;
+  created_at: Date | null;
 }
 
 interface Post {
   id: number;
+  author: User;
+  fileUrl: string;
+  caption: string | null;
+  created_at: Date;
+  comments: Comment[];
+  comments_count: number;
   likes: Like[];
   likes_count: number;
+  bookmarks: Bookmark[];
+  bookmark_count: number;
 }
 
 export default function LikeButton({ post }: { post: Post }) {
@@ -30,7 +70,9 @@ export default function LikeButton({ post }: { post: Post }) {
   const { refetch } = useGetPostQuery();
   const { data } = useRetrieveUserQuery();
 
-  const initialLiked = post.likes.some((like) => like.user.id === data?.id);
+  const initialLiked = post.likes.some(
+    (like) => like.user.profile.id === data?.id
+  );
   const [liked, setLiked] = useState(
     localStorage.getItem(`${post.id}-liked`) === "true" ? true : initialLiked
   );

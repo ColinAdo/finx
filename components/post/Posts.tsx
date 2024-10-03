@@ -19,13 +19,13 @@ export default function Post() {
         <div className="flex flex-col space-y-2.5">
           <div className="flex items-center justify-between px-3 sm:px-0">
             <div className="flex space-x-3 items-center">
-              <Link href={`/dashboard/${post.author.username}`}>
+              <Link href={`/dashboard/${post.author.profile.username}`}>
                 <Avatar className="relative h-6 w-6 cursor-pointer">
-                  {post.author.profile_picture ? (
+                  {post.author.profile.profile_picture ? (
                     <Image
-                      src={post.author.profile_picture}
+                      src={post.author.profile.profile_picture}
                       fill
-                      alt={`${post.author.username}'s avatar`}
+                      alt={`${post.author.profile.username}'s avatar`}
                       className="rounded-full object-cover"
                     />
                   ) : (
@@ -40,9 +40,9 @@ export default function Post() {
               </Link>
               <div className="text-sm">
                 <p className="space-x-1">
-                  <Link href={`/dashboard/${post.author.username}`}>
+                  <Link href={`/dashboard/${post.author.profile.username}`}>
                     <span className="font-semibold">
-                      {post.author.username}
+                      {post.author.profile.username}
                     </span>
                   </Link>
                   <span
@@ -59,7 +59,7 @@ export default function Post() {
                 </p>
               </div>
             </div>
-            <PostOptions post={post} userId={post.author.id} />
+            <PostOptions post={post} userId={post.author.profile.id} />
           </div>
           <Card className="relative h-[450px] w-full overflow-hidden rounded-none sm:rounded-md">
             {post.fileUrl ? (
