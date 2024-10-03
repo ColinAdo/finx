@@ -6,21 +6,26 @@ import Timestamp from "./Timestamp";
 import CommentOptions from "./CommentOptions";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 
-interface User {
-  id: number;
-  username: string;
-  profile_picture: string;
-  email: string;
-  profession: string;
-  github: string;
-  instagram: string;
-  linkedin: string;
-  x: string;
+interface ProfileData {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 interface Comment {
   id: number;
-  owner: User;
+  owner: ProfileData;
   post: number;
   comment: string | null;
   comment_image?: string | null;
@@ -32,9 +37,9 @@ interface Props {
   inputRef?: React.RefObject<HTMLInputElement>;
 }
 
-function Comment({ comment, inputRef }: Props) {
+export default function Comment({ comment, inputRef }: Props) {
   const { data: user } = useRetrieveUserQuery();
-  const username = comment.owner.username;
+  const username = comment.owner.profile.username;
   const href = `/dashboard/${username}`;
 
   return (
@@ -57,7 +62,7 @@ function Comment({ comment, inputRef }: Props) {
           >
             Reply
           </button>
-          {comment.owner.id === user?.id && (
+          {comment.owner.profile.id === user?.id && (
             <CommentOptions comment={comment} />
           )}
         </div>
@@ -65,5 +70,3 @@ function Comment({ comment, inputRef }: Props) {
     </div>
   );
 }
-
-export default Comment;

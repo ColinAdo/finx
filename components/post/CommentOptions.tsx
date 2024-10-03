@@ -16,15 +16,26 @@ import {
 } from "@/redux/features/postSlice";
 import { useRetrieveUserQuery } from "@/redux/features/authApiSlice";
 
-interface User {
-  id: number;
-  username: string;
-  profile_picture: string;
+interface ProfileData {
+  profile: {
+    id: number;
+    email: string;
+    username: string;
+    bio: string;
+    profile_picture: string;
+    website: string;
+    gender: string;
+  };
+  following: any[];
+  followers: any[];
+  posts: any[];
+  following_count: number;
+  followers_count: number;
 }
 
 interface Comment {
   id: number;
-  owner: User;
+  owner: ProfileData;
   post: number;
   comment: string | null;
   comment_image?: string | null;
@@ -58,7 +69,7 @@ export default function CommentOptions({ comment }: Props) {
         <MoreHorizontal className="h-5 w-5 hidden group-hover:inline cursor-pointer dark:text-neutral-400" />
       </DialogTrigger>
       <DialogContent className="dialogContent">
-        {comment.owner.id === user?.id && (
+        {comment.owner.profile.id === user?.id && (
           <form onSubmit={onSubmit} className="postOption">
             <input type="hidden" name="id" value={comment.id} />
             <SubmitButton className="text-red-500 font-bold disabled:cursor-not-allowed w-full p-3">
