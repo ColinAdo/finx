@@ -8,7 +8,7 @@ interface Props {
   postId: number;
 }
 
-function ShareButton({ postId }: Props) {
+export default function ShareButton({ postId }: Props) {
   return (
     <ActionIcons
       onClick={() => {
@@ -24,5 +24,3 @@ function ShareButton({ postId }: Props) {
     </ActionIcons>
   );
 }
-
-export default ShareButton;
