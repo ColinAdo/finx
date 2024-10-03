@@ -6,7 +6,7 @@ interface Props {
   href: string;
 }
 
-function ViewPost({ className, href }: Props) {
+export default function ViewPost({ className, href }: Props) {
   return (
     <div className={cn("flex p-3", className)}>
       <Link
@@ -18,5 +18,3 @@ function ViewPost({ className, href }: Props) {
     </div>
   );
 }
-
-export default ViewPost;
