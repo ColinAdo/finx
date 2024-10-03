@@ -10,8 +10,6 @@ import {
 import { CommentSchema } from "@/lib/schemas";
 import { ImagePlus } from "lucide-react";
 import { zodResolver } from "@hookform/resolvers/zod";
-// import { Comment } from "@prisma/client";
-// import { User } from "next-auth";
 import Link from "next/link";
 import { useEdgeStore } from "@/lib/edgestore";
 import { FormEvent, useState } from "react";
