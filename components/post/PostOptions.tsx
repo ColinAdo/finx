@@ -14,7 +14,7 @@ import {
   useGetPostQuery,
 } from "@/redux/features/postSlice";
 
-interface ProfileData {
+interface User {
   profile: {
     id: number;
     email: string;
@@ -31,9 +31,41 @@ interface ProfileData {
   followers_count: number;
 }
 
+interface PostComment {
+  id: number;
+  owner: User;
+  post: number;
+  comment: string | null;
+  comment_image?: string | null;
+  created_at: Date;
+}
+
+interface Like {
+  id: number;
+  user: User;
+  post: number;
+  created_at: Date | null;
+}
+
+interface Bookmark {
+  id: number;
+  user: User;
+  post: number;
+  created_at: Date | null;
+}
+
 interface Post {
   id: number;
-  author: ProfileData;
+  author: User;
+  fileUrl: string;
+  caption: string | null;
+  created_at: Date;
+  comments: PostComment[];
+  comments_count: number;
+  likes: Like[];
+  likes_count: number;
+  bookmarks: Bookmark[];
+  bookmark_count: number;
 }
 
 interface Props {
