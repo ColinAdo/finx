@@ -63,7 +63,7 @@ interface Props {
   post: Post;
 }
 
-function MiniPost({ post }: Props) {
+export default function MiniPost({ post }: Props) {
   const username = post.author.profile.username;
   const href = `/dashboard/${username}`;
 
@@ -91,5 +91,3 @@ function MiniPost({ post }: Props) {
     </div>
   );
 }
-
-export default MiniPost;
